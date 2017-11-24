@@ -5,7 +5,7 @@ from rest_framework.test import APITestCase
 from recipes.models import Recipe, Ingredient
 
 
-class RecipeManagerTestCase(APITestCase):
+class RecipeApiTestCase(APITestCase):
     def test_recipe_list_empty(self):
         url = reverse('recipes-list')
         response = self.client.get(url)
