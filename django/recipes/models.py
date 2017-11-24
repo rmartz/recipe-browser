@@ -14,8 +14,8 @@ class Ingredient(models.Model):
 class RecipeManager(models.Manager):
     def for_ingredients(self, ingredients):
         """Return a queryset of all recipes that fit the provided ingredients."""
-        missing_ingredients = (Ingredient.objects.all()
-                               .exclude(id__in=ingredients))
+        ids = map(int, ingredients)
+        missing_ingredients = (Ingredient.objects.all().exclude(id__in=ids))
         return self.all().exclude(ingredients__in=missing_ingredients)
 
 

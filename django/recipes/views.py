@@ -17,6 +17,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
         if 'ingredients' in request.GET:
             ingredients = request.GET.get('ingredients').split(',')
             recipes = Recipe.objects.for_ingredients(ingredients)
+        recipes = recipes.prefetch_related('ingredients')
 
         page = self.paginate_queryset(recipes)
         if page is not None:
