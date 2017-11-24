@@ -15,7 +15,7 @@ class RecipeManagerTestCase(TestCase):
         recipe = Recipe.objects.create(label="Test recipe")
         recipe.ingredients.add(ingredient)
 
-        result = Recipe.objects.for_ingredients([ingredient])
+        result = Recipe.objects.for_ingredients([ingredient.id])
 
         self.assertSequenceEqual(result, [recipe])
 
