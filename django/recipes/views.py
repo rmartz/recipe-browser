@@ -15,7 +15,7 @@ class RecipeViewSet(viewsets.ModelViewSet):
         queryset = Recipe.objects.all()
         try:
             ingredients = self.request.query_params['ingredients']
-            queryset = Recipe.objects.for_ingredients(ingredients)
+            queryset = Recipe.objects.for_ingredients(ingredients.split(','))
         except KeyError:
             pass
 

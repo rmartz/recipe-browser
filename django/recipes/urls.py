@@ -5,8 +5,8 @@ from rest_framework.routers import DefaultRouter
 
 
 router = DefaultRouter()
-router.register(r'recipes', views.RecipeViewSet)
-router.register(r'ingredients', views.IngredientViewSet)
+router.register(r'recipes', views.RecipeViewSet, 'recipes')
+router.register(r'ingredients', views.IngredientViewSet, 'ingredients')
 
 urlpatterns = [
     url(r'^', include(router.urls))
