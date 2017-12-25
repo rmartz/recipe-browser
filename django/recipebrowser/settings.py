@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     # Third party libraries
     'rest_framework',
     'debug_toolbar',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [
