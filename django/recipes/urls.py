@@ -1,7 +1,10 @@
 from django.conf import settings
 from django.conf.urls import url, include
-from recipes import views
+from django.conf.urls.static import static
+
 from rest_framework.routers import DefaultRouter
+
+from recipes import views
 
 
 router = DefaultRouter()
@@ -10,7 +13,7 @@ router.register(r'ingredients', views.IngredientViewSet, 'ingredients')
 
 urlpatterns = [
     url(r'^', include(router.urls))
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:
     import debug_toolbar

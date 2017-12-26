@@ -1,0 +1,68 @@
+<html>
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.4/lodash.min.js"></script>
+  <script>
+    api_base_url = '/';
+    function make_api_request(url, params) {
+      var myHeaders = new Headers();
+
+      var myInit = { method: 'GET',
+                     headers: myHeaders,
+                     mode: 'cors',
+                     cache: 'default' };
+
+      var params_string = '';
+      if(params) {
+        params_string = '?' + $.param(params);
+      }
+
+      var myRequest = new Request(api_base_url + 'api/' + url + params_string);
+
+      return fetch(myRequest,myInit).then(function(response) {
+        return response.json();
+      });
+    }
+
+    var recipes_promise = make_api_request('recipes/');
+    var ingredients_promise = make_api_request('ingredients/');
+
+    window.addEventListener('load', function () {
+      var recipies_vue = new Vue({
+        el: '#recipies_list',
+        data: {
+          recipies: null,
+          ingredients: null
+        },
+        mounted: function () {
+          var vm = this;
+          console.log("Loading dynamic values");
+          recipes_promise.then(function(recipies) {
+            vm.recipies = recipies;
+          });
+          ingredients_promise.then(function(ingredients) {
+            vm.ingredients = ingredients;
+          });
+        }
+      });
+    })
+  </script>
+</head>
+<body>
+  <div id="recipies_list" v-if="recipies">
+    <ul>
+      <li v-for="recipe in recipies">
+        <h3>{{ recipe.label }}</h3>
+        <form>
+          <ul>
+            <li v-for="ingredient in ingredients">
+              <input type="checkbox" v-bind:checked="ingredient.id in recipe.ingredients"></input>
+              {{ingredient.label}}
+            </li>
+          </ul>
+        </form>
+      </li>
+    </ul>
+  </div>
+</body>
+</html>

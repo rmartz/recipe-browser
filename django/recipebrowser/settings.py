@@ -128,6 +128,13 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+DIRNAME = os.path.dirname(__file__)
+STATIC_ROOT = os.path.join(DIRNAME, '.assets')
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, "static"),
+]
+
 INTERNAL_IPS = [
     '127.0.0.1'
 ]
