@@ -3,7 +3,7 @@ from django.contrib import admin
 from django.views.generic import TemplateView
 
 urlpatterns = [
-    url(r'^/?$', TemplateView.as_view(template_name='static/index.html')),
+    url(r'^$', TemplateView.as_view(template_name='static/index.html')),
     url(r'^api/', include('recipes.urls')),
     url(r'^admin/', admin.site.urls),
 ]

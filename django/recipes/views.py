@@ -14,8 +14,8 @@ class RecipeViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         queryset = Recipe.objects.all()
         if 'limit_to' in self.request.query_params:
-            ingredients = self.request.query_params['limit_to']
-            queryset = Recipe.objects.for_ingredients(ingredients.split(','))
+            ingredients = self.request.query_params['limit_to'].split(',')
+            queryset = Recipe.objects.for_ingredients(filter(None, ingredients))
 
         if 'has_ingredient' in self.request.query_params:
             ingredient = self.request.query_params['has_ingredient']

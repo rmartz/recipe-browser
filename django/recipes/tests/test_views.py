@@ -56,7 +56,7 @@ class RecipeApiTestCase(APITestCase):
         """Check that recipes with no ingredients match limit_to filter."""
         recipe = Recipe.objects.create(label="Test recipe")
 
-        url = '{}?limit_to=-1'.format(
+        url = '{}?limit_to='.format(
             reverse('recipes-list'))
         response = self.client.get(url)
 
