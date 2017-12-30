@@ -6,6 +6,10 @@ from django.db import models
 
 class Ingredient(models.Model):
     label = models.CharField(max_length=128, unique=True)
+    parent = models.ForeignKey('recipes.Ingredient',
+                               models.SET_NULL,
+                               blank=True,
+                               null=True)
 
     def __str__(self):
         return self.label
