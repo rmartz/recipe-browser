@@ -10,10 +10,7 @@ class RecipeSerializer(serializers.ModelSerializer):
 
 
 class IngredientSerializer(serializers.ModelSerializer):
-    recipe_count = serializers.SerializerMethodField()
-
-    def get_recipe_count(self, obj):
-        return Recipe.objects.filter(ingredients=obj).count()
+    recipe_count = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = Ingredient

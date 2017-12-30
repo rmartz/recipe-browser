@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
+from django.db.models import Count
+
 from rest_framework import viewsets
 
 from recipes.models import Recipe, Ingredient
@@ -27,3 +29,8 @@ class RecipeViewSet(viewsets.ModelViewSet):
 class IngredientViewSet(viewsets.ModelViewSet):
     serializer_class = IngredientSerializer
     queryset = Ingredient.objects.all()
+
+    def get_queryset(self):
+        return Ingredient.objects.all().annotate(
+            recipe_count=Count('recipes'),
+        )
