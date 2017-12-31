@@ -41,14 +41,12 @@
         mounted: function () {
           var vm = this;
           console.log("Loading dynamic values");
-          Promise.all([
-            make_api_request('ingredients/'),
-            make_api_request('recipes/', {'limit_to': ''})
-          ]).then(function(data) {
-            var [ingredients, recipes] = data;
 
+          make_api_request('ingredients/').then(function(ingredients) {
             vm.ingredients = _.orderBy(ingredients, 'recipe_count', 'desc');
-            vm.ingredients_map = _.keyBy(ingredients, 'id');
+          });
+          make_api_request('recipes/', {'limit_to': ''}).then(function(recipes) {
+            // Store recipes as an object to deduplicate by ID
             vm.recipes_map = _.keyBy(recipes, 'id')
             vm.recipes = _.orderBy(vm.recipes_map, ['label'])
           });
