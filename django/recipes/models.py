@@ -39,7 +39,7 @@ class RecipeIngredient(models.Model):
     ingredient = models.ForeignKey(Ingredient)
     recipe = models.ForeignKey(Recipe)
     optional = models.BooleanField(default=False)
-    quantity = models.CharField(max_length=32)
+    quantity = models.CharField(max_length=32, blank=True)
 
     def __str__(self):
         return "{} - {}".format(self.recipe.label, self.ingredient.label)
