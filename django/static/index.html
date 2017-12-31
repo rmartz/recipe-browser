@@ -90,7 +90,7 @@
   </script>
 </head>
 <body>
-  <div id="recipes_list" v-if="recipes">
+  <div id="recipes_list" v-if="recipes" style="display: flex;">
     <ul>
       <li v-for="ingredient in ingredients">
         <input type="checkbox" v-on:click="changeFilter(ingredient.id, $event)"
