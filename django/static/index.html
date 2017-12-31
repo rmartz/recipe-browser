@@ -28,6 +28,15 @@
       });
     }
 
+    function process_recipes(recipes, ingredients) {
+      return _.map(recipes, function(recipe) {
+        recipe.ingredients = _.map(recipe.ingredients, function(id) {
+          return ingredients[id];
+        });
+        return recipe;
+      });
+    }
+
     window.addEventListener('load', function () {
       var recipes_vue = new Vue({
         el: '#recipes_list',
@@ -39,18 +48,21 @@
         mounted: function () {
           var vm = this;
           console.log("Loading dynamic values");
-          make_api_request('recipes/', {'limit_to': ''}).then(function(recipes) {
-            vm.recipes = recipes;
-          });
-          make_api_request('ingredients/').then(function(ingredients) {
+          Promise.all([
+            make_api_request('ingredients/'),
+            make_api_request('recipes/', {'limit_to': ''})
+          ]).then(function(data) {
+            var [ingredients, recipes] = data;
+            ingredients = _.keyBy(ingredients, 'id');
+
             vm.ingredients = ingredients;
+            vm.recipes = process_recipes(recipes, ingredients);
           });
         },
         methods: {
           changeFilter: function(ingredient, event) {
             var vm = this;
 
-            console.log(ingredient)
             if(event.target.checked) {
               console.log("Adding ingredient " + ingredient)
               // Adding an ingredient
@@ -58,18 +70,16 @@
               inventory.unshift(ingredient);
               make_api_request(
                 'recipes/',
-                 {'limit_to': _.join(inventory, ','),
-                  'has_ingredient': ingredient
-               }).then(function(new_recipes) {
-                  console.log("New recipes: " + new_recipes);
-                  vm.recipes = vm.recipes.concat(new_recipes);
-                });
+                {'limit_to': _.join(inventory, ','),
+                 'has_ingredient': ingredient}
+              ).then(function(new_recipes) {
+                new_recipes = process_recipes(new_recipes, vm.ingredients)
+                vm.recipes = vm.recipes.concat(new_recipes);
+              });
             } else {
               console.log("Removing ingredient " + ingredient)
               // Removing an ingredient, unload any recipes that require it
               _.remove(this.recipes, function(recipe) {
-                console.log(recipe.ingredients)
-                console.log(recipe.ingredients.includes(ingredient))
                 return recipe.ingredients.includes(ingredient);
               });
             }
@@ -77,23 +87,24 @@
         }
       });
     });
-
-    Vue.component('recipe-item', {
-      props: ['recipe'],
-      template: '<h3>{{ recipe.label }}</h3>',
-    })
   </script>
 </head>
 <body>
   <div id="recipes_list" v-if="recipes">
     <ul>
       <li v-for="ingredient in ingredients">
-        <input type="checkbox" v-on:click="changeFilter(ingredient.id, $event)" v-bind:value="ingredient" v-model="inventory">{{ingredient.label}}</input>
+        <input type="checkbox" v-on:click="changeFilter(ingredient.id, $event)"
+               v-bind:value="ingredient" v-model="inventory">
+          {{ingredient.label}}
+        </input>({{ingredient.recipe_count}})
       </li>
     </ul>
     <ul>
       <li v-for="recipe in recipes">
-        <recipe-item v-bind:recipe="recipe"></recipe-item>
+        <h3>{{ recipe.label }}</h3>
+        <ul>
+          <li v-for="ingredient in recipe.ingredients">{{ingredient.label}}</li>
+        </ul>
       </li>
     </ul>
   </div>
