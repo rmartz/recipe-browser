@@ -29,12 +29,12 @@
     }
 
     function process_recipes(recipes, ingredients) {
-      return _.map(recipes, function(recipe) {
-        recipe.ingredients = _.map(recipe.ingredients, function(id) {
-          return ingredients[id];
+      _.each(recipes, function(recipe) {
+        _.each(recipe.ingredients, function(ingredient) {
+          _.assign(ingredient, ingredients[ingredient.id]);
         });
-        return recipe;
       });
+      return _.keyBy(recipes, 'id')
     }
 
     window.addEventListener('load', function () {
@@ -42,6 +42,7 @@
         el: '#recipes_list',
         data: {
           recipes: null,
+          recipes_map: null,
           ingredients: null,
           ingredients_map: null,
           inventory: []
@@ -57,7 +58,8 @@
 
             vm.ingredients = _.orderBy(ingredients, 'recipe_count', 'desc');
             vm.ingredients_map = _.keyBy(ingredients, 'id');
-            vm.recipes = process_recipes(recipes, vm.ingredients_map);
+            vm.recipes_map = process_recipes(recipes, vm.ingredients_map);
+            vm.recipes = _.orderBy(vm.recipes_map, ['label'])
           });
         },
         methods: {
@@ -74,14 +76,15 @@
                 {'limit_to': _.join(inventory, ','),
                  'has_ingredient': ingredient}
               ).then(function(new_recipes) {
-                new_recipes = process_recipes(new_recipes, vm.ingredients_map)
-                vm.recipes = vm.recipes.concat(new_recipes);
+                new_recipes = process_recipes(new_recipes, vm.ingredients_map);
+                _.assign(vm.recipes_map, new_recipes);
+                vm.recipes = _.orderBy(vm.recipes_map, ['label'])
               });
             } else {
               console.log("Removing ingredient " + ingredient)
               // Removing an ingredient, unload any recipes that require it
               _.remove(this.recipes, function(recipe) {
-                return _.find(recipe.ingredients, {'id': ingredient});
+                return _.find(recipe.ingredients, {'id': ingredient, optional: false});
               });
             }
           },
@@ -108,7 +111,11 @@
       <li v-for="recipe in recipes">
         <h3>{{ recipe.label }}</h3>
         <ul>
-          <li v-for="ingredient in recipe.ingredients">{{ingredient.label}}</li>
+          <li v-for="ingredient in recipe.ingredients">
+            {{ingredient.label}}
+            <span v-if="ingredient.quantity">({{ingredient.quantity}})</span>
+            <em v-if="ingredient.optional">Optional</em>
+          </li>
         </ul>
       </li>
     </ul>
