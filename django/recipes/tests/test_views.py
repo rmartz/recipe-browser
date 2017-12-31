@@ -1,3 +1,5 @@
+from __future__ import unicode_literals
+
 from django.urls import reverse
 
 from rest_framework.test import APITestCase
@@ -15,13 +17,20 @@ class RecipeApiTestCase(APITestCase):
 
     def test_recipe_list_nonempty(self):
         recipe = Recipe.objects.create(label="Test recipe")
+        ingredient = Ingredient.objects.create(label="Test ingredient")
+        RecipeIngredient.objects.create(recipe=recipe, ingredient=ingredient)
 
         url = reverse('recipes-list')
         response = self.client.get(url)
 
-        self.assertEqual(response.json(), [{'id': recipe.id,
-                                            'ingredients': [],
-                                            'label': recipe.label}])
+        self.assertEqual(response.json(), [
+            {'id': recipe.id,
+             'label': recipe.label,
+             'ingredients': [
+                {'id': ingredient.id,
+                 'optional': False,
+                 'quantity': ''}]
+             }])
         self.assertEqual(response.status_code, 200)
 
     def test_recipe_list__limit_to__with_ingredient(self):
@@ -35,9 +44,8 @@ class RecipeApiTestCase(APITestCase):
             ingredient.id)
         response = self.client.get(url)
 
-        self.assertEqual(response.json(), [{'id': recipe.id,
-                                            'ingredients': [ingredient.id],
-                                            'label': recipe.label}])
+        self.assertEqual(len(response.json()), 1)
+        self.assertEqual(response.json()[0]['id'], recipe.id)
         self.assertEqual(response.status_code, 200)
 
     def test_recipe_list__limit_to__missing_ingredient(self):
@@ -64,9 +72,8 @@ class RecipeApiTestCase(APITestCase):
             reverse('recipes-list'))
         response = self.client.get(url)
 
-        self.assertEqual(response.json(), [{'id': recipe.id,
-                                            'ingredients': [ingredient.id],
-                                            'label': recipe.label}])
+        self.assertEqual(len(response.json()), 1)
+        self.assertEqual(response.json()[0]['id'], recipe.id)
         self.assertEqual(response.status_code, 200)
 
     def test_recipe_list__limit_to__mix_optional_required_ingredient(self):
@@ -86,10 +93,8 @@ class RecipeApiTestCase(APITestCase):
             required.id)
         response = self.client.get(url)
 
-        self.assertEqual(response.json(), [{'id': recipe.id,
-                                            'ingredients': [optional.id,
-                                                            required.id],
-                                            'label': recipe.label}])
+        self.assertEqual(len(response.json()), 1)
+        self.assertEqual(response.json()[0]['id'], recipe.id)
         self.assertEqual(response.status_code, 200)
 
     def test_recipe_list__limit_to__no_ingredients(self):
@@ -100,9 +105,8 @@ class RecipeApiTestCase(APITestCase):
             reverse('recipes-list'))
         response = self.client.get(url)
 
-        self.assertEqual(response.json(), [{'id': recipe.id,
-                                            'ingredients': [],
-                                            'label': recipe.label}])
+        self.assertEqual(len(response.json()), 1)
+        self.assertEqual(response.json()[0]['id'], recipe.id)
         self.assertEqual(response.status_code, 200)
 
     def test_recipe_list__limit_to__with_multi(self):
@@ -116,9 +120,8 @@ class RecipeApiTestCase(APITestCase):
             ingredient.id)
         response = self.client.get(url)
 
-        self.assertEqual(response.json(), [{'id': recipe.id,
-                                            'ingredients': [ingredient.id],
-                                            'label': recipe.label}])
+        self.assertEqual(len(response.json()), 1)
+        self.assertEqual(response.json()[0]['id'], recipe.id)
         self.assertEqual(response.status_code, 200)
 
     def test_recipe_list__has_ingredient__missing(self):
@@ -145,7 +148,6 @@ class RecipeApiTestCase(APITestCase):
             ingredient.id)
         response = self.client.get(url)
 
-        self.assertEqual(response.json(), [{'id': recipe.id,
-                                            'ingredients': [ingredient.id],
-                                            'label': recipe.label}])
+        self.assertEqual(len(response.json()), 1)
+        self.assertEqual(response.json()[0]['id'], recipe.id)
         self.assertEqual(response.status_code, 200)
