@@ -84,6 +84,9 @@
                 return recipe.ingredients.includes(ingredient);
               });
             }
+          },
+          fieldName: function(ingredient) {
+            return 'ingredient_' + ingredient.id;
           }
         }
       });
@@ -95,9 +98,10 @@
     <ul>
       <li v-for="ingredient in ingredients">
         <input type="checkbox" v-on:click="changeFilter(ingredient.id, $event)"
-               v-bind:value="ingredient" v-model="inventory">
-          {{ingredient.label}}
-        </input>({{ingredient.recipe_count}})
+               v-bind:id="fieldName(ingredient)" v-bind:value="ingredient"
+               v-model="inventory">
+        <label v-bind:for="fieldName(ingredient)">{{ingredient.label}}</label>
+        ({{ingredient.recipe_count}})
       </li>
     </ul>
     <ul>
