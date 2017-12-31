@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.db.models import Q
 
 
 class Ingredient(models.Model):
@@ -19,8 +20,14 @@ class RecipeManager(models.Manager):
     def for_ingredients(self, ingredients):
         """Return all recipes that only use the provided ingredients."""
         ids = map(int, ingredients)
-        missing_ingredients = (Ingredient.objects.all().exclude(id__in=ids))
-        return self.all().exclude(ingredients__in=missing_ingredients)
+        missing_ingredients = Ingredient.objects.all().exclude(id__in=ids)
+
+        # Exclude recipes that have a required missing ingredient
+        unmatched_recipes = RecipeIngredient.objects.filter(
+            optional=False,
+            ingredient__in=missing_ingredients
+        ).values('recipe')
+        return self.all().exclude(id__in=unmatched_recipes)
 
 
 class Recipe(models.Model):
