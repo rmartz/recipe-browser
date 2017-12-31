@@ -81,7 +81,7 @@
               console.log("Removing ingredient " + ingredient)
               // Removing an ingredient, unload any recipes that require it
               _.remove(this.recipes, function(recipe) {
-                return recipe.ingredients.includes(ingredient);
+                return _.find(recipe.ingredients, {'id': ingredient});
               });
             }
           },
