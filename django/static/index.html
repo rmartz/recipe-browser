@@ -28,15 +28,6 @@
       });
     }
 
-    function process_recipes(recipes, ingredients) {
-      _.each(recipes, function(recipe) {
-        _.each(recipe.ingredients, function(ingredient) {
-          _.assign(ingredient, ingredients[ingredient.id]);
-        });
-      });
-      return _.keyBy(recipes, 'id')
-    }
-
     window.addEventListener('load', function () {
       var recipes_vue = new Vue({
         el: '#recipes_list',
@@ -58,7 +49,7 @@
 
             vm.ingredients = _.orderBy(ingredients, 'recipe_count', 'desc');
             vm.ingredients_map = _.keyBy(ingredients, 'id');
-            vm.recipes_map = process_recipes(recipes, vm.ingredients_map);
+            vm.recipes_map = _.keyBy(recipes, 'id')
             vm.recipes = _.orderBy(vm.recipes_map, ['label'])
           });
         },
@@ -76,7 +67,7 @@
                 {'limit_to': _.join(inventory, ','),
                  'has_ingredient': ingredient}
               ).then(function(new_recipes) {
-                new_recipes = process_recipes(new_recipes, vm.ingredients_map);
+                new_recipes = _.keyBy(new_recipes, 'id')
                 _.assign(vm.recipes_map, new_recipes);
                 vm.recipes = _.orderBy(vm.recipes_map, ['label'])
               });

@@ -9,6 +9,7 @@ class RecipeSerializer(serializers.ModelSerializer):
     def get_ingredients(self, obj):
         return [{
             'id': ri.ingredient.id,
+            'label': ri.ingredient.label,
             'optional': ri.optional,
             'quantity': ri.quantity
         } for ri in obj.recipeingredient_set.all()]
