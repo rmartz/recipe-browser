@@ -43,6 +43,7 @@
         data: {
           recipes: null,
           ingredients: null,
+          ingredients_map: null,
           inventory: []
         },
         mounted: function () {
@@ -53,10 +54,10 @@
             make_api_request('recipes/', {'limit_to': ''})
           ]).then(function(data) {
             var [ingredients, recipes] = data;
-            ingredients = _.keyBy(ingredients, 'id');
 
-            vm.ingredients = ingredients;
-            vm.recipes = process_recipes(recipes, ingredients);
+            vm.ingredients = _.orderBy(ingredients, 'recipe_count', 'desc');
+            vm.ingredients_map = _.keyBy(ingredients, 'id');
+            vm.recipes = process_recipes(recipes, vm.ingredients_map);
           });
         },
         methods: {
@@ -73,7 +74,7 @@
                 {'limit_to': _.join(inventory, ','),
                  'has_ingredient': ingredient}
               ).then(function(new_recipes) {
-                new_recipes = process_recipes(new_recipes, vm.ingredients)
+                new_recipes = process_recipes(new_recipes, vm.ingredients_map)
                 vm.recipes = vm.recipes.concat(new_recipes);
               });
             } else {
