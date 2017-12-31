@@ -1,5 +1,5 @@
 from django.test import TestCase
-from recipes.models import Recipe, Ingredient
+from recipes.models import Recipe, Ingredient, RecipeIngredient
 
 
 class RecipeManagerTestCase(TestCase):
@@ -13,7 +13,7 @@ class RecipeManagerTestCase(TestCase):
     def test_recipe_manager__has_ingredient(self):
         ingredient = Ingredient.objects.create(label="Test ingredient")
         recipe = Recipe.objects.create(label="Test recipe")
-        recipe.ingredients.add(ingredient)
+        RecipeIngredient.objects.create(recipe=recipe, ingredient=ingredient)
 
         result = Recipe.objects.for_ingredients([ingredient.id])
 
@@ -22,7 +22,7 @@ class RecipeManagerTestCase(TestCase):
     def test_recipe_manager__missing_ingredient(self):
         ingredient = Ingredient.objects.create(label="Test ingredient")
         recipe = Recipe.objects.create(label="Test recipe")
-        recipe.ingredients.add(ingredient)
+        RecipeIngredient.objects.create(recipe=recipe, ingredient=ingredient)
 
         result = Recipe.objects.for_ingredients([])
 

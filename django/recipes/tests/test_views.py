@@ -2,7 +2,7 @@ from django.urls import reverse
 
 from rest_framework.test import APITestCase
 
-from recipes.models import Recipe, Ingredient
+from recipes.models import Recipe, Ingredient, RecipeIngredient
 
 
 class RecipeApiTestCase(APITestCase):
@@ -28,7 +28,7 @@ class RecipeApiTestCase(APITestCase):
         """Check that limit_to includes recipes with ingredients."""
         ingredient = Ingredient.objects.create(label="Test ingredient")
         recipe = Recipe.objects.create(label="Test recipe")
-        recipe.ingredients.add(ingredient)
+        RecipeIngredient.objects.create(recipe=recipe, ingredient=ingredient)
 
         url = '{}?limit_to={}'.format(
             reverse('recipes-list'),
@@ -44,7 +44,7 @@ class RecipeApiTestCase(APITestCase):
         """Check that limit_to excludes recipes with missing ingredinets."""
         ingredient = Ingredient.objects.create(label="Test ingredient")
         recipe = Recipe.objects.create(label="Test recipe")
-        recipe.ingredients.add(ingredient)
+        RecipeIngredient.objects.create(recipe=recipe, ingredient=ingredient)
 
         url = '{}?limit_to=-1'.format(reverse('recipes-list'))
         response = self.client.get(url)
@@ -69,7 +69,7 @@ class RecipeApiTestCase(APITestCase):
         """Assert that limit_to properly handles ingredient list."""
         ingredient = Ingredient.objects.create(label="Test ingredient")
         recipe = Recipe.objects.create(label="Test recipe")
-        recipe.ingredients.add(ingredient)
+        RecipeIngredient.objects.create(recipe=recipe, ingredient=ingredient)
 
         url = '{}?limit_to={},-1'.format(
             reverse('recipes-list'),
@@ -98,7 +98,7 @@ class RecipeApiTestCase(APITestCase):
         """Assert that has_ingredient returns recipes with ingredient."""
         ingredient = Ingredient.objects.create(label="Test ingredient")
         recipe = Recipe.objects.create(label="Test recipe")
-        recipe.ingredients.add(ingredient)
+        RecipeIngredient.objects.create(recipe=recipe, ingredient=ingredient)
 
         url = '{}?has_ingredient={}'.format(
             reverse('recipes-list'),
