@@ -28,6 +28,7 @@ class RecipeApiTestCase(APITestCase):
              'label': recipe.label,
              'ingredients': [
                 {'id': ingredient.id,
+                 'label': ingredient.label,
                  'optional': False,
                  'quantity': ''}]
              }])
