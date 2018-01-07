@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db.models import Count
+from django.db.models import Case, Count, F, IntegerField, When
 
 from rest_framework import viewsets
 
@@ -31,6 +31,29 @@ class IngredientViewSet(viewsets.ModelViewSet):
     queryset = Ingredient.objects.all()
 
     def get_queryset(self):
-        return Ingredient.objects.all().annotate(
-            recipe_count=Count('recipes'),
-        )
+        queryset = Ingredient.objects.all()
+        if 'suggest_with' in self.request.query_params:
+            ingredients = self.request.query_params['suggest_with'].split(',')
+            ids = map(int, ingredients)
+            # Find all recipes that use the base ingredients
+            recipes = Recipe.objects.filter(
+                recipeingredient__ingredient__in=ids)
+
+            # Remove provided ingredients since they can't be suggestions for
+            # themselves
+            queryset = queryset.exclude(id__in=ids)
+
+            # Annotate a count of the recipes remaining ingredients share with
+            # provides ingredients
+            queryset = queryset.annotate(
+                weight=Count(Case(
+                    When(recipeingredient__recipe__in=recipes,
+                         then=F('recipeingredient__recipe__id')),
+                    output_field=IntegerField()),
+                    distinct=True))
+        else:
+            queryset = queryset.annotate(
+                weight=Count('recipes'),
+            )
+
+        return queryset

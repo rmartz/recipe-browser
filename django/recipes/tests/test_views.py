@@ -152,3 +152,84 @@ class RecipeApiTestCase(APITestCase):
         self.assertEqual(len(response.json()), 1)
         self.assertEqual(response.json()[0]['id'], recipe.id)
         self.assertEqual(response.status_code, 200)
+
+
+class IngredientApiTestCase(APITestCase):
+    def test_ingredient_list_empty(self):
+        url = reverse('ingredients-list')
+        response = self.client.get(url)
+
+        self.assertEqual(response.json(), [])
+        self.assertEqual(response.status_code, 200)
+
+    def test_ingredient_list_nonempty(self):
+        ingredient = Ingredient.objects.create(label="Test ingredient")
+
+        url = reverse('ingredients-list')
+        response = self.client.get(url)
+
+        self.assertEqual(response.json(), [
+            {'id': ingredient.id,
+             'label': ingredient.label,
+             'parent': ingredient.parent,
+             'weight': 0
+             }])
+        self.assertEqual(response.status_code, 200)
+
+    def test_suggest_with_excludes_ingredients(self):
+        ingredient = Ingredient.objects.create(label='Test ingredient')
+        recipe = Recipe.objects.create(label='Test recipe')
+        RecipeIngredient.objects.create(recipe=recipe, ingredient=ingredient)
+
+        url = '{}?suggest_with={}'.format(
+            reverse('ingredients-list'),
+            ingredient.id)
+        response = self.client.get(url)
+
+        # We should have received zero ingredients back
+        self.assertEqual(len(response.json()), 0)
+        self.assertEqual(response.status_code, 200)
+
+    def test_suggest_with_shared_ingredients(self):
+        starting_ingredient = Ingredient.objects.create(label='Input')
+        shared_ingredient = Ingredient.objects.create(label='Shared')
+        recipe = Recipe.objects.create(label='Test recipe')
+        RecipeIngredient.objects.create(recipe=recipe,
+                                        ingredient=starting_ingredient)
+        RecipeIngredient.objects.create(recipe=recipe,
+                                        ingredient=shared_ingredient)
+
+        url = '{}?suggest_with={}'.format(
+            reverse('ingredients-list'),
+            starting_ingredient.id)
+        response = self.client.get(url)
+
+        # We should have one suggested ingredient
+        self.assertEqual(len(response.json()), 1)
+        result_ingredient = response.json()[0]
+        # It should be the shared ingredient
+        self.assertEqual(result_ingredient['id'], shared_ingredient.id)
+        # It should have a weight of 1, from the shared recipe
+        self.assertEqual(result_ingredient['weight'], 1)
+        self.assertEqual(response.status_code, 200)
+
+    def test_suggest_with_unrelated_ingredients(self):
+        starting_ingredient = Ingredient.objects.create(label='Input')
+        shared_ingredient = Ingredient.objects.create(label='Shared')
+        recipe = Recipe.objects.create(label='Test recipe')
+        RecipeIngredient.objects.create(recipe=recipe,
+                                        ingredient=starting_ingredient)
+
+        url = '{}?suggest_with={}'.format(
+            reverse('ingredients-list'),
+            starting_ingredient.id)
+        response = self.client.get(url)
+
+        # We should have one suggested ingredient
+        self.assertEqual(len(response.json()), 1)
+        result_ingredient = response.json()[0]
+        # It should be the shared ingredient
+        self.assertEqual(result_ingredient['id'], shared_ingredient.id)
+        # It should have a weight of zero, as it shares no recipes
+        self.assertEqual(result_ingredient['weight'], 0)
+        self.assertEqual(response.status_code, 200)

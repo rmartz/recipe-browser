@@ -20,8 +20,8 @@ class RecipeSerializer(serializers.ModelSerializer):
 
 
 class IngredientSerializer(serializers.ModelSerializer):
-    recipe_count = serializers.IntegerField(read_only=True)
+    weight = serializers.IntegerField(read_only=True)
 
     class Meta:
         model = Ingredient
-        fields = ('id', 'label', 'recipe_count', 'parent')
+        fields = ('id', 'label', 'weight', 'parent')
