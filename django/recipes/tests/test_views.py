@@ -177,6 +177,7 @@ class IngredientApiTestCase(APITestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_suggest_with_excludes_ingredients(self):
+        """Ingredients are not suggested for themselves."""
         ingredient = Ingredient.objects.create(label='Test ingredient')
         recipe = Recipe.objects.create(label='Test recipe')
         RecipeIngredient.objects.create(recipe=recipe, ingredient=ingredient)
@@ -191,6 +192,7 @@ class IngredientApiTestCase(APITestCase):
         self.assertEqual(response.status_code, 200)
 
     def test_suggest_with_shared_ingredients(self):
+        """Shared ingredients are suggested."""
         starting_ingredient = Ingredient.objects.create(label='Input')
         shared_ingredient = Ingredient.objects.create(label='Shared')
         recipe = Recipe.objects.create(label='Test recipe')
@@ -213,12 +215,47 @@ class IngredientApiTestCase(APITestCase):
         self.assertEqual(result_ingredient['weight'], 1)
         self.assertEqual(response.status_code, 200)
 
-    def test_suggest_with_unrelated_ingredients(self):
-        starting_ingredient = Ingredient.objects.create(label='Input')
+    def test_suggest_with_weighted_by_shared_ingredients(self):
+        """Suggested ingredients are weighted by number of connections."""
+        starting_ingredient1 = Ingredient.objects.create(label='Input1')
+        starting_ingredient2 = Ingredient.objects.create(label='Input2')
         shared_ingredient = Ingredient.objects.create(label='Shared')
         recipe = Recipe.objects.create(label='Test recipe')
         RecipeIngredient.objects.create(recipe=recipe,
+                                        ingredient=starting_ingredient1)
+        RecipeIngredient.objects.create(recipe=recipe,
+                                        ingredient=starting_ingredient2)
+        RecipeIngredient.objects.create(recipe=recipe,
+                                        ingredient=shared_ingredient)
+
+        url = '{}?suggest_with={},{}'.format(
+            reverse('ingredients-list'),
+            starting_ingredient1.id, starting_ingredient2.id)
+        response = self.client.get(url)
+
+        # We should have one suggested ingredient
+        self.assertEqual(len(response.json()), 1)
+        result_ingredient = response.json()[0]
+        # It should be the shared ingredient
+        self.assertEqual(result_ingredient['id'], shared_ingredient.id)
+        # It should have a weight of 1, from the shared recipe
+        self.assertEqual(result_ingredient['weight'], 2)
+        self.assertEqual(response.status_code, 200)
+
+    def test_suggest_with_weighted_by_shared_recipes(self):
+        """Suggested ingredients are weighted by number of matching recipes."""
+        starting_ingredient = Ingredient.objects.create(label='Input1')
+        shared_ingredient = Ingredient.objects.create(label='Shared')
+        recipe1 = Recipe.objects.create(label='Test recipe 1')
+        RecipeIngredient.objects.create(recipe=recipe1,
                                         ingredient=starting_ingredient)
+        RecipeIngredient.objects.create(recipe=recipe1,
+                                        ingredient=shared_ingredient)
+        recipe2 = Recipe.objects.create(label='Test recipe 2')
+        RecipeIngredient.objects.create(recipe=recipe2,
+                                        ingredient=starting_ingredient)
+        RecipeIngredient.objects.create(recipe=recipe2,
+                                        ingredient=shared_ingredient)
 
         url = '{}?suggest_with={}'.format(
             reverse('ingredients-list'),
@@ -230,6 +267,6 @@ class IngredientApiTestCase(APITestCase):
         result_ingredient = response.json()[0]
         # It should be the shared ingredient
         self.assertEqual(result_ingredient['id'], shared_ingredient.id)
-        # It should have a weight of zero, as it shares no recipes
-        self.assertEqual(result_ingredient['weight'], 0)
+        # It should have a weight of 1, from the shared recipe
+        self.assertEqual(result_ingredient['weight'], 2)
         self.assertEqual(response.status_code, 200)

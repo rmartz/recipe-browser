@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from django.db.models import Case, Count, F, IntegerField, When
+from django.db.models import Count
 
 from rest_framework import viewsets
 
@@ -35,25 +35,20 @@ class IngredientViewSet(viewsets.ModelViewSet):
         if 'suggest_with' in self.request.query_params:
             ingredients = self.request.query_params['suggest_with'].split(',')
             ids = map(int, ingredients)
-            # Find all recipes that use the base ingredients
-            recipes = Recipe.objects.filter(
-                recipeingredient__ingredient__in=ids)
-
             # Remove provided ingredients since they can't be suggestions for
             # themselves
             queryset = queryset.exclude(id__in=ids)
 
-            # Annotate a count of the recipes remaining ingredients share with
-            # provides ingredients
-            queryset = queryset.annotate(
-                weight=Count(Case(
-                    When(recipeingredient__recipe__in=recipes,
-                         then=F('recipeingredient__recipe__id')),
-                    output_field=IntegerField()),
-                    distinct=True))
-        else:
-            queryset = queryset.annotate(
-                weight=Count('recipes'),
-            )
+            # Filter for ingredients that belong to a recipe that has one of
+            # the suggestion prompt ingredients. This looks really convoluted,
+            # but it makes it so the suggestion weight below scales with
+            # number of shared ingredients... a recipe it has two ingredients
+            # in common with will be weighted higher that one it doesn't.
+            queryset = queryset.filter(
+                recipeingredient__recipe__recipeingredient__ingredient_id__in=ids)  # NOQA
+
+        queryset = queryset.annotate(
+            weight=Count('recipes'),
+        )
 
         return queryset
