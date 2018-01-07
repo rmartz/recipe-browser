@@ -11,7 +11,7 @@ class Ingredient(models.Model):
                                blank=True,
                                null=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.label
 
 
@@ -37,7 +37,7 @@ class Recipe(models.Model):
 
     objects = RecipeManager()
 
-    def __str__(self):
+    def __unicode__(self):
         return self.label
 
 
@@ -47,5 +47,5 @@ class RecipeIngredient(models.Model):
     optional = models.BooleanField(default=False)
     quantity = models.CharField(max_length=32, blank=True)
 
-    def __str__(self):
+    def __unicode__(self):
         return "{} - {}".format(self.recipe.label, self.ingredient.label)
