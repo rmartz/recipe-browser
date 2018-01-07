@@ -4,12 +4,30 @@ from __future__ import unicode_literals
 from django.db import models
 
 
+class IngredientManager(models.Manager):
+    def include_ancestors(self, current_level):
+        full_ids = list(current_level)
+        while True:
+            ancestors = (self.filter(id__in=current_level,
+                                     parent__isnull=False)
+                         .values_list('parent_id', flat=True))
+            if len(ancestors) == 0:
+                break
+            else:
+                current_level = ancestors
+                full_ids += ancestors
+
+        return self.filter(id__in=full_ids)
+
+
 class Ingredient(models.Model):
     label = models.CharField(max_length=128, unique=True)
     parent = models.ForeignKey('recipes.Ingredient',
                                models.SET_NULL,
                                blank=True,
                                null=True)
+
+    objects = IngredientManager()
 
     def __unicode__(self):
         return self.label
@@ -19,7 +37,11 @@ class RecipeManager(models.Manager):
     def for_ingredients(self, ingredients):
         """Return all recipes that only use the provided ingredients."""
         ids = map(int, ingredients)
-        missing_ingredients = Ingredient.objects.all().exclude(id__in=ids)
+        # Include ancestry, so if a provided ingredient is a child of another
+        # we credit the request with both
+        with_ancestry = Ingredient.objects.include_ancestors(ids)
+        missing_ingredients = Ingredient.objects.all().exclude(
+            id__in=with_ancestry)
 
         # Exclude recipes that have a required missing ingredient
         unmatched_recipes = RecipeIngredient.objects.filter(
