@@ -54,16 +54,13 @@
         methods: {
           changeFilter: function(ingredient, event) {
             var vm = this;
-            inventory_ids = _.map(this.inventory, "id");
 
             if(event.target.checked) {
               console.log("Adding ingredient " + ingredient)
               // Adding an ingredient
-              // Insert ingredient into inventory
-              inventory_ids.unshift(ingredient);
               make_api_request(
                 'recipes/',
-                {'limit_to': _.join(inventory_ids, ','),
+                {'limit_to': _.join(this.inventory, ','),
                  'has_ingredient': ingredient}
               ).then(function(new_recipes) {
                 new_recipes = _.keyBy(new_recipes, 'id')
@@ -72,20 +69,28 @@
               });
             } else {
               console.log("Removing ingredient " + ingredient)
-              // Removing an ingredient, unload any recipes that require it
-              _.pull(inventory_ids, ingredient);
               _.remove(this.recipes, function(recipe) {
                 return _.find(recipe.ingredients, {'id': ingredient, optional: false});
               });
             }
 
-            make_api_request(
-              'ingredients/',
-              {'suggest_with': _.join(inventory_ids, ',')}
-            ).then(function(new_ingredients) {
-              vm.ingredients = _.orderBy(vm.inventory, 'label').concat(
-                _.orderBy(new_ingredients, ['weight', 'label'], ['desc', 'asc']));
-            })
+            if(this.inventory.length >= 3) {
+              make_api_request(
+                'ingredients/',
+                {'suggest_with': _.join(this.inventory, ',')}
+              ).then(function(new_ingredients) {
+                checkedIngredients = _(vm.ingredients)
+                    .keyBy('id')
+                    .at(vm.inventory).value();
+                console.log(checkedIngredients);
+                vm.ingredients = _.orderBy(checkedIngredients, 'label').concat(
+                  _.orderBy(new_ingredients, ['weight', 'label'], ['desc', 'asc']));
+              })
+            } else {
+              make_api_request('ingredients/').then(function(ingredients) {
+                vm.ingredients = _.orderBy(ingredients, ['weight', 'label'], ['desc', 'asc']);
+              });
+            }
           },
           fieldName: function(ingredient) {
             return 'ingredient_' + ingredient.id;
@@ -99,11 +104,10 @@
   <div id="recipes_list" v-if="recipes" style="display: flex;">
     <ul>
       <li v-for="ingredient in ingredients">
-        <input type="checkbox" v-on:click="changeFilter(ingredient.id, $event)"
-               v-bind:id="fieldName(ingredient)" v-bind:value="ingredient"
+        <input type="checkbox" v-on:change="changeFilter(ingredient.id, $event)"
+               v-bind:id="fieldName(ingredient)" v-bind:value="ingredient.id"
                v-model="inventory">
         <label v-bind:for="fieldName(ingredient)">{{ingredient.label}}</label>
-        ({{ingredient.weight}})
       </li>
     </ul>
     <ul>
