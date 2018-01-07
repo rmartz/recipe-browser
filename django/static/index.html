@@ -75,18 +75,21 @@
             }
 
             if(this.inventory.length >= 3) {
+              // With 3 or more ingredients, start suggesting ingredients
               make_api_request(
                 'ingredients/',
                 {'suggest_with': _.join(this.inventory, ',')}
               ).then(function(new_ingredients) {
+                // Pick out the ingredients that are checked to show at top
                 checkedIngredients = _(vm.ingredients)
                     .keyBy('id')
                     .at(vm.inventory).value();
-                console.log(checkedIngredients);
+                // Concat the new suggested ingredients after
                 vm.ingredients = _.orderBy(checkedIngredients, 'label').concat(
                   _.orderBy(new_ingredients, ['weight', 'label'], ['desc', 'asc']));
               })
             } else {
+              // With fewer than 3 ingredients, suggest the whole list
               make_api_request('ingredients/').then(function(ingredients) {
                 vm.ingredients = _.orderBy(ingredients, ['weight', 'label'], ['desc', 'asc']);
               });
