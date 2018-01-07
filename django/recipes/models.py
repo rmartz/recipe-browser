@@ -49,3 +49,6 @@ class RecipeIngredient(models.Model):
 
     def __unicode__(self):
         return "{} - {}".format(self.recipe.label, self.ingredient.label)
+
+    class Meta:
+        unique_together = [('ingredient', 'recipe')]
