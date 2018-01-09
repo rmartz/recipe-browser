@@ -33,7 +33,6 @@
         el: '#recipes_list',
         data: {
           recipes: null,
-          recipes_map: null,
           ingredients: null,
           ingredients_map: null,
           inventory: []
@@ -44,9 +43,7 @@
 
           this.loadIngredients();
           make_api_request('recipes/', {'limit_to': ''}).then(function(recipes) {
-            // Store recipes as an object to deduplicate by ID
-            vm.recipes_map = _.keyBy(recipes, 'id')
-            vm.recipes = _.orderBy(vm.recipes_map, ['label'])
+            vm.recipes = _.orderBy(vm.recipes, ['label'])
           });
         },
         methods: {
@@ -61,9 +58,7 @@
                 {'limit_to': _.join(this.inventory, ','),
                  'has_ingredient': ingredient}
               ).then(function(new_recipes) {
-                new_recipes = _.keyBy(new_recipes, 'id')
-                _.assign(vm.recipes_map, new_recipes);
-                vm.recipes = _.orderBy(vm.recipes_map, ['label'])
+                vm.recipes = _.orderBy(new_recipes, ['label']).concat(vm.recipes);
               });
             } else {
               console.log("Removing ingredient " + ingredient)
