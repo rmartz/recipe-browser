@@ -42,9 +42,7 @@
           var vm = this;
           console.log("Loading dynamic values");
 
-          make_api_request('ingredients/').then(function(ingredients) {
-            vm.ingredients = _.orderBy(ingredients, ['weight', 'label'], ['desc', 'asc']);
-          });
+          this.loadIngredients();
           make_api_request('recipes/', {'limit_to': ''}).then(function(recipes) {
             // Store recipes as an object to deduplicate by ID
             vm.recipes_map = _.keyBy(recipes, 'id')
@@ -74,6 +72,14 @@
               });
             }
 
+            this.loadIngredients();
+          },
+          fieldName: function(ingredient) {
+            return 'ingredient_' + ingredient.id;
+          },
+          loadIngredients: function() {
+            var vm = this;
+
             if(this.inventory.length >= 3) {
               // With 3 or more ingredients, start suggesting ingredients
               make_api_request(
@@ -91,12 +97,11 @@
             } else {
               // With fewer than 3 ingredients, suggest the whole list
               make_api_request('ingredients/').then(function(ingredients) {
-                vm.ingredients = _.orderBy(ingredients, ['weight', 'label'], ['desc', 'asc']);
+                vm.ingredients = _(ingredients).filter(function(i) {
+                  return i.is_trivial == false && i.weight > 0;
+                }).orderBy(['weight', 'label'], ['desc', 'asc']).value();
               });
             }
-          },
-          fieldName: function(ingredient) {
-            return 'ingredient_' + ingredient.id;
           }
         }
       });
