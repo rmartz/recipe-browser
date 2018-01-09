@@ -17,11 +17,17 @@ class RecipeViewSet(viewsets.ModelViewSet):
         queryset = Recipe.objects.all()
         if 'limit_to' in self.request.query_params:
             ingredients = self.request.query_params['limit_to'].split(',')
-            queryset = Recipe.objects.for_ingredients(filter(None, ingredients))
+            ingredients = filter(None, ingredients)  # Remove any falsey values
+            queryset = Recipe.objects.for_ingredients(ingredients)
 
         if 'has_ingredient' in self.request.query_params:
             ingredient = self.request.query_params['has_ingredient']
             queryset = queryset.filter(ingredients=ingredient)
+
+        queryset = queryset.prefetch_related(
+            'recipeingredient_set',
+            'recipeingredient_set__ingredient'
+        )
 
         return queryset
 
