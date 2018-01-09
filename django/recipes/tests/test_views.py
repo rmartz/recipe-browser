@@ -29,6 +29,7 @@ class RecipeApiTestCase(APITestCase):
              'ingredients': [
                 {'id': ingredient.id,
                  'label': ingredient.label,
+                 'is_trivial': ingredient.is_trivial,
                  'optional': False,
                  'quantity': ''}]
              }])
@@ -172,6 +173,7 @@ class IngredientApiTestCase(APITestCase):
             {'id': ingredient.id,
              'label': ingredient.label,
              'parent': ingredient.parent,
+             'is_trivial': ingredient.is_trivial,
              'weight': 0
              }])
         self.assertEqual(response.status_code, 200)

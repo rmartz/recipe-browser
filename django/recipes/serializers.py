@@ -11,7 +11,8 @@ class RecipeSerializer(serializers.ModelSerializer):
             'id': ri.ingredient.id,
             'label': ri.ingredient.label,
             'optional': ri.optional,
-            'quantity': ri.quantity
+            'quantity': ri.quantity,
+            'is_trivial': ri.ingredient.is_trivial
         } for ri in obj.recipeingredient_set.all()]
 
     class Meta:
@@ -24,4 +25,4 @@ class IngredientSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Ingredient
-        fields = ('id', 'label', 'weight', 'parent')
+        fields = ('id', 'label', 'weight', 'parent', 'is_trivial')

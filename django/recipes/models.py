@@ -26,6 +26,7 @@ class Ingredient(models.Model):
                                models.SET_NULL,
                                blank=True,
                                null=True)
+    is_trivial = models.BooleanField(default=False)
 
     objects = IngredientManager()
 
@@ -40,10 +41,13 @@ class RecipeManager(models.Manager):
         # Include ancestry, so if a provided ingredient is a child of another
         # we credit the request with both
         with_ancestry = Ingredient.objects.include_ancestors(ids)
-        missing_ingredients = Ingredient.objects.all().exclude(
-            id__in=with_ancestry)
+        missing_ingredients = (Ingredient.objects.all()
+                               # Exclude ingredients the user has satisfied
+                               .exclude(id__in=with_ancestry)
+                               # Or that are trivially pressumed satisfied
+                               .filter(is_trivial=False))
 
-        # Exclude recipes that have a required missing ingredient
+        # Exclude any recipes that require a missing ingredient
         unmatched_recipes = RecipeIngredient.objects.filter(
             optional=False,
             ingredient__in=missing_ingredients

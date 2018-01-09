@@ -27,3 +27,13 @@ class RecipeManagerTestCase(TestCase):
         result = Recipe.objects.for_ingredients([])
 
         self.assertSequenceEqual(result, [])
+
+    def test_recipe_manager__missing_trivial_ingredient(self):
+        ingredient = Ingredient.objects.create(label="Test ingredient",
+                                               is_trivial=True)
+        recipe = Recipe.objects.create(label="Test recipe")
+        RecipeIngredient.objects.create(recipe=recipe, ingredient=ingredient)
+
+        result = Recipe.objects.for_ingredients([])
+
+        self.assertSequenceEqual(result, [recipe])
