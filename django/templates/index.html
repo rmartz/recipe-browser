@@ -88,7 +88,7 @@
                 // Concat the new suggested ingredients after
                 vm.ingredients = _.orderBy(checkedIngredients, 'label').concat(
                   _.orderBy(new_ingredients, ['weight', 'label'], ['desc', 'asc']));
-              })
+              });
             } else {
               // With fewer than 3 ingredients, suggest the whole list
               make_api_request('ingredients/').then(function(ingredients) {
@@ -104,6 +104,7 @@
   </script>
 </head>
 <body>
+  {% verbatim %}
   <div id="recipes_list" v-if="recipes" style="display: flex;">
     <ul>
       <li v-for="ingredient in ingredients">
@@ -126,5 +127,6 @@
       </li>
     </ul>
   </div>
+  {% endverbatim %}
 </body>
 </html>
