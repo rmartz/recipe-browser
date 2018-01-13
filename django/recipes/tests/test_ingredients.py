@@ -18,3 +18,15 @@ class IngredientManagerTestCase(TestCase):
 
         self.assertQuerysetEqual(result, [repr(ancestor), repr(descendant)],
                                  ordered=False)
+
+    def test_include_ancestors_detects_loops(self):
+        ancestor = Ingredient.objects.create(label="Ancestor")
+        middle = Ingredient.objects.create(label="Middle", parent=ancestor)
+        descendant = Ingredient.objects.create(label="Child", parent=middle)
+
+        # Create a loop from ancester back to descendant
+        ancestor.parent = descendant
+        ancestor.save()
+
+        # This should terminate
+        Ingredient.objects.include_ancestors([descendant.id])

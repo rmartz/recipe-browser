@@ -6,16 +6,18 @@ from django.db import models
 
 class IngredientManager(models.Manager):
     def include_ancestors(self, current_level):
-        full_ids = list(current_level)
+        full_ids = set(current_level)
         while True:
-            ancestors = (self.filter(id__in=current_level,
-                                     parent__isnull=False)
-                         .values_list('parent_id', flat=True))
-            if len(ancestors) == 0:
+            ancestors = set(self.filter(id__in=current_level,
+                                        parent__isnull=False)
+                            .values_list('parent_id', flat=True))
+            if not ancestors.difference(full_ids):
+                # If we didn't get any new IDs, then we found all we can find
                 break
             else:
+                # Else, add the new IDs and recurse for their parents
                 current_level = ancestors
-                full_ids += ancestors
+                full_ids |= ancestors
 
         return self.filter(id__in=full_ids)
 
