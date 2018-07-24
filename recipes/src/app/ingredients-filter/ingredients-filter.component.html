@@ -1,0 +1,5 @@
+<ul>
+  <li *ngFor="let ingredient of ingredients.list() | async">
+    {{ingredient.label}}
+  </li>
+</ul>
