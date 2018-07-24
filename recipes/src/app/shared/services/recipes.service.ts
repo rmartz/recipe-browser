@@ -9,9 +9,11 @@ export class Recipes {
   private _recipes: BehaviorSubject<Recipe[]>;
 
   constructor() {
+    const ingred1 = new Ingredient('Ingredient 1');
+    const ingred2 = new Ingredient('Ingredient 2');
     this._recipes = new BehaviorSubject<Recipe[]>([
-      new Recipe('Recipe 1', ['Ingredient 1']),
-      new Recipe('Recipe 2', ['Ingredient 1', 'Ingredient 2'])
+      new Recipe('Recipe 1', [ingred1]),
+      new Recipe('Recipe 2', [ingred1, ingred2])
     ]);
   }
 
