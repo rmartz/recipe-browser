@@ -3,6 +3,5 @@ export class Ingredient {
     this.label = label;
   }
 
-  id: number;
   label: string;
 }
