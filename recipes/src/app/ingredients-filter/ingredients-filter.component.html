@@ -1,5 +1,8 @@
+<h2>Ingredients</h2>
 <ul>
   <li *ngFor="let ingredient of ingredients.list() | async">
     {{ingredient.label}}
+    <button *ngIf="!ingredient.blacklisted" (click)="ingredients.addBlacklist(ingredient)">x</button>
+    <button *ngIf="ingredient.blacklisted" (click)="ingredients.removeBlacklist(ingredient)" style="background: #F00">x</button>
   </li>
 </ul>

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
 
+import { Ingredient } from '../models/ingredient.model';
 import { Recipe, RecipeJson } from '../models/recipe.model';
 import { Ingredients } from './ingredients.service';
 
@@ -10,6 +11,7 @@ import { Ingredients } from './ingredients.service';
 export class Recipes {
 
   private _recipes = new BehaviorSubject<Recipe[]>([]);
+  private _filtered: Observable<Recipe[]>;
 
   constructor(protected http: HttpClient,
               protected ingredients: Ingredients) {
@@ -24,9 +26,25 @@ export class Recipes {
     ).subscribe(result => {
       this._recipes.next(result);
     });
+
+    this._filtered = combineLatest<Recipe[], Ingredient[]>(
+      this.all(), ingredients.blacklist()
+    ).pipe(
+      map(([recipes, blacklist]) => {
+        return recipes.filter(recipe => {
+          return !recipe.ingredients.some(ingredient => {
+            return blacklist.includes(ingredient);
+          });
+        });
+      })
+    );
   }
 
-  public list(): Observable<Recipe[]> {
+  public all(): Observable<Recipe[]> {
     return this._recipes.asObservable();
+  }
+
+  public filtered(): Observable<Recipe[]> {
+    return this._filtered;
   }
 }
