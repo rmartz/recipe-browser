@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-import { Observable, BehaviorSubject, combineLatest } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+import { Observable, BehaviorSubject, fromEvent, of, concat } from 'rxjs';
 
-import { Ingredient } from '../models/ingredient.model';
 import { Recipe, RecipeJson } from '../models/recipe.model';
 import { Ingredients } from './ingredients.service';
 
@@ -27,18 +26,22 @@ export class Recipes {
       this._recipes.next(result);
     });
 
-    this._filtered = combineLatest<Recipe[], Ingredient[]>(
-      this.all(), ingredients.blacklist()
-    ).pipe(
-      map(([recipes, blacklist]) => {
-        return recipes.filter(recipe => {
-          return !recipe.ingredients.some(ingredient => {
-            return blacklist.includes(ingredient);
-          });
-        });
-      })
-    );
-  }
+    this._filtered = this.all().pipe(
+        switchMap<Recipe[], Recipe[]>(recipes => {
+          // Whenever a blacklistChange event is triggered, re-filter all recipes
+          return concat(
+            of(recipes),
+            fromEvent(document, 'blacklistChange').pipe(
+              map<any, Recipe[]>(() => {
+                return recipes.filter(recipe => {
+                  return !recipe.ingredients.some(ingredient => ingredient.blacklisted);
+                });
+              })
+            )
+          );
+        })
+      );
+    }
 
   public all(): Observable<Recipe[]> {
     return this._recipes.asObservable();
