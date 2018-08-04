@@ -1,5 +1,10 @@
 import { Ingredient } from './ingredient.model';
 
+export class RecipeJson {
+  label: string;
+  ingredients: string[];
+}
+
 export class Recipe {
   constructor(label: string, ingredients: Ingredient[]) {
     this.label = label;

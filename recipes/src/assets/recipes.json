@@ -1,0 +1,16 @@
+[
+  {
+    "label": "Recipe 1",
+    "ingredients": [
+      "Ingredient 1",
+      "Ingredient 2"
+    ]
+  },
+  {
+    "label": "Recipe 2",
+    "ingredients": [
+      "Ingredient 1"
+    ]
+  }
+
+]

@@ -1,29 +1,24 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { Ingredient } from '../models/ingredient.model';
-import { Recipes } from './recipes.service';
 
 @Injectable()
 export class Ingredients {
 
-  private _ingredients: Observable<Ingredient[]>;
+  private _ingredients = new BehaviorSubject<Ingredient[]>([]);
+  private _list: {[name: string]: Ingredient} = {};
 
-  constructor(recipeService: Recipes) {
-    this._ingredients = recipeService.list().pipe(
-      map(recipes => {
-        const ingredients = new Set<Ingredient>();
-        recipes.forEach(recipe => {
-          recipe.ingredients.forEach(ingredient => {
-            ingredients.add(ingredient);
-          });
-        });
-        return Array.from(ingredients.values());
-      })
-    );
-  }
+  constructor() {  }
 
   public list(): Observable<Ingredient[]> {
-    return this._ingredients;
+    return this._ingredients.asObservable();
+  }
+
+  public get(name: string): Ingredient {
+    if (!this._list[name]) {
+      this._list[name] = new Ingredient(name);
+      this._ingredients.next(Object.values(this._list));
+    }
+    return this._list[name];
   }
 }
