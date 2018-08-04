@@ -30,14 +30,15 @@ export class Recipes {
         switchMap<Recipe[], Recipe[]>(recipes => {
           // Whenever a blacklistChange event is triggered, re-filter all recipes
           return concat(
-            of(recipes),
-            fromEvent(document, 'blacklistChange').pipe(
-              map<any, Recipe[]>(() => {
-                return recipes.filter(recipe => {
-                  return !recipe.ingredients.some(ingredient => ingredient.blacklisted);
-                });
-              })
-            )
+            // Concat an empty observable so we can build filtered recipes prior to any events
+            of(this),
+            fromEvent(document, 'blacklistChange')
+          ).pipe(
+            map<any, Recipe[]>(() => {
+              return recipes.filter(recipe => {
+                return !recipe.ingredients.some(ingredient => ingredient.blacklisted);
+              });
+            })
           );
         })
       );
