@@ -14,3 +14,13 @@ export class Recipe {
   label: string;
   ingredients: Ingredient[];
 }
+
+export class RecipeWeight {
+  constructor(recipe: Recipe, weight: number) {
+    this.recipe = recipe;
+    this.weight = weight;
+  }
+
+  recipe: Recipe;
+  weight: number;
+}

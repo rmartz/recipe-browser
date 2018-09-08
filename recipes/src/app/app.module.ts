@@ -9,6 +9,7 @@ import { Recipes } from './shared/services/recipes.service';
 import { RecipesDisplayComponent } from './recipes-display/recipes-display.component';
 import { IngredientItemComponent } from './ingredient-item/ingredient-item.component';
 import { RecipeItemComponent } from './recipe-item/recipe-item.component';
+import { Suggestion } from './shared/services/suggestion.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { RecipeItemComponent } from './recipe-item/recipe-item.component';
   ],
   providers: [
     Ingredients,
-    Recipes
+    Recipes,
+    Suggestion
   ],
   bootstrap: [AppComponent]
 })
