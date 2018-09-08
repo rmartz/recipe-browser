@@ -1,0 +1,7 @@
+{{recipe.label}}
+
+<ul>
+  <li *ngFor="let ingredient of recipe.ingredients">
+      <app-ingredient-item [ingredient]="ingredient"></app-ingredient-item>
+  </li>
+</ul>

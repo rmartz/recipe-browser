@@ -1,6 +1,6 @@
 <h2>Recipes</h2>
 <ul>
   <li *ngFor="let recipe of recipes.filtered() | async">
-    {{recipe.label}}
+    <app-recipe-item [recipe]="recipe"></app-recipe-item>
   </li>
 </ul>
