@@ -33,7 +33,7 @@
       "label": "Gin and Tonic",
       "ingredients": [
           "Gin",
-          "Tonic Water"
+          "Tonic water"
       ]
   },
   {
@@ -799,6 +799,14 @@
           "Scotch",
           "Cherry liqueur",
           "Orange peel"
+      ]
+  },
+  {
+      "label": "The Black Friday",
+      "ingredients": [
+        "Cold brew coffee",
+        "Fernet Branca",
+        "Simple syrup"
       ]
   }
 ]
