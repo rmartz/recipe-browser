@@ -1,16 +1,804 @@
 [
   {
-    "label": "Recipe 1",
-    "ingredients": [
-      "Ingredient 1",
-      "Ingredient 2"
-    ]
+      "label": "Harvey Wallbanger",
+      "ingredients": [
+          "Vodka",
+          "Orange juice",
+          "Galliano"
+      ]
   },
   {
-    "label": "Recipe 2",
-    "ingredients": [
-      "Ingredient 1"
-    ]
+      "label": "Screwdriver",
+      "ingredients": [
+          "Vodka",
+          "Orange juice"
+      ]
+  },
+  {
+      "label": "Bay Breeze",
+      "ingredients": [
+          "Cranberry juice",
+          "Pineapple juice",
+          "White rum"
+      ]
+  },
+  {
+      "label": "Rum and Coke",
+      "ingredients": [
+          "White rum",
+          "Coke"
+      ]
+  },
+  {
+      "label": "Gin and Tonic",
+      "ingredients": [
+          "Gin",
+          "Tonic Water"
+      ]
+  },
+  {
+      "label": "Gin gimlet",
+      "ingredients": [
+          "Lime juice",
+          "Rasberries",
+          "Gin",
+          "Simple syrup"
+      ]
+  },
+  {
+      "label": "Angry balls",
+      "ingredients": [
+          "Fireball whiskey",
+          "Hard cider"
+      ]
+  },
+  {
+      "label": "Mimmosa",
+      "ingredients": [
+          "Champagne",
+          "Orange juice"
+      ]
+  },
+  {
+      "label": "Malibu bay breeze",
+      "ingredients": [
+          "Cranberry juice",
+          "Pineapple juice",
+          "Coconut rum"
+      ]
+  },
+  {
+      "label": "Amaretto sour",
+      "ingredients": [
+          "Lemon juice",
+          "Amaretto"
+      ]
+  },
+  {
+      "label": "Long Island Iced Tea",
+      "ingredients": [
+          "Vodka",
+          "White rum",
+          "Coke",
+          "Gin",
+          "Tequila",
+          "Triple sec"
+      ]
+  },
+  {
+      "label": "Fuzzy navel",
+      "ingredients": [
+          "Orange juice",
+          "Peach schnapps"
+      ]
+  },
+  {
+      "label": "Pineapple vodka",
+      "ingredients": [
+          "Vodka",
+          "Pineapple juice"
+      ]
+  },
+  {
+      "label": "Sex on the Beach",
+      "ingredients": [
+          "Cranberry juice",
+          "Vodka",
+          "Peach schnapps",
+          "Orange juice"
+      ]
+  },
+  {
+      "label": "Buttery nipple",
+      "ingredients": [
+          "Butterscotch schnapps",
+          "Irish cream"
+      ]
+  },
+  {
+      "label": "Three Wise Men",
+      "ingredients": [
+          "Jim Bean bourbon",
+          "Jack Daniels whiskey",
+          "Johnnie Walker scotch whiskey"
+      ]
+  },
+  {
+      "label": "B-52 Shot",
+      "ingredients": [
+          "Coffee liqueur",
+          "Grand Marnier",
+          "Irish cream"
+      ]
+  },
+  {
+      "label": "Cinnamon Toast Crunch shot",
+      "ingredients": [
+          "Fireball whiskey",
+          "Rumchatta"
+      ]
+  },
+  {
+      "label": "Lemon Drop Shot",
+      "ingredients": [
+          "Vodka",
+          "Triple sec",
+          "Lemon juice",
+          "Sugar"
+      ]
+  },
+  {
+      "label": "Sidecar",
+      "ingredients": [
+          "Cognac",
+          "Simple syrup",
+          "Lemon juice",
+          "Sugar"
+      ]
+  },
+  {
+      "label": "Tequila Sunrise",
+      "ingredients": [
+          "Tequila",
+          "Grenadine syrup",
+          "Orange juice"
+      ]
+  },
+  {
+      "label": "Old Fashioned",
+      "ingredients": [
+          "Angostura bitters",
+          "Whiskey",
+          "Sugar"
+      ]
+  },
+  {
+      "label": "Kamikaze Shot",
+      "ingredients": [
+          "Triple sec",
+          "Vodka",
+          "Lime juice"
+      ]
+  },
+  {
+      "label": "Orange Blossom",
+      "ingredients": [
+          "Orange juice",
+          "Gin",
+          "Sweet vermouth"
+      ]
+  },
+  {
+      "label": "Martini",
+      "ingredients": [
+          "Gin",
+          "Dry vermouth"
+      ]
+  },
+  {
+      "label": "Whiskey sour",
+      "ingredients": [
+          "Whiskey",
+          "Lemon juice",
+          "Egg whites",
+          "Gomme syrup"
+      ]
+  },
+  {
+      "label": "Margarita",
+      "ingredients": [
+          "Tequila",
+          "Triple sec",
+          "Lime juice"
+      ]
+  },
+  {
+      "label": "Mojito",
+      "ingredients": [
+          "White rum",
+          "Soda water",
+          "Lime juice",
+          "Sugar",
+          "Mint"
+      ]
+  },
+  {
+      "label": "Daiquiri",
+      "ingredients": [
+          "White rum",
+          "Simple syrup",
+          "Lime juice"
+      ]
+  },
+  {
+      "label": "Champagne cocktail",
+      "ingredients": [
+          "Angostura bitters",
+          "Cognac",
+          "Champagne",
+          "Sugar"
+      ]
+  },
+  {
+      "label": "Manhattan",
+      "ingredients": [
+          "Maraschino cherry",
+          "Angostura bitters",
+          "Rye whiskey",
+          "Sweet vermouth"
+      ]
+  },
+  {
+      "label": "Negroni",
+      "ingredients": [
+          "Compari",
+          "Gin",
+          "Sweet vermouth"
+      ]
+  },
+  {
+      "label": "Fizz",
+      "ingredients": [
+          "Gin",
+          "Lemon juice",
+          "Gomme syrup",
+          "Soda water"
+      ]
+  },
+  {
+      "label": "Cosmopolitan",
+      "ingredients": [
+          "Lime juice",
+          "Cranberry juice",
+          "Triple sec",
+          "Vodka"
+      ]
+  },
+  {
+      "label": "Mint julep",
+      "ingredients": [
+          "Bourbon",
+          "Powdered sugar",
+          "Water",
+          "Mint"
+      ]
+  },
+  {
+      "label": "Piña colada",
+      "ingredients": [
+          "Pineapple juice",
+          "White rum",
+          "Coconut cream",
+          "Ice"
+      ]
+  },
+  {
+      "label": "Captain and Coke",
+      "ingredients": [
+          "Spiced rum",
+          "Coke"
+      ]
+  },
+  {
+      "label": "Kool-Aid Shot",
+      "ingredients": [
+          "Midori",
+          "Cranberry juice",
+          "Amaretto"
+      ]
+  },
+  {
+      "label": "Irish Frog Shot",
+      "ingredients": [
+          "Midori",
+          "Irish cream"
+      ]
+  },
+  {
+      "label": "Irish Car Bomb",
+      "ingredients": [
+          "Guinness dry stout",
+          "Irish whiskey",
+          "Irish cream"
+      ]
+  },
+  {
+      "label": "Grasshopper",
+      "ingredients": [
+          "Crème de menthe",
+          "Crème de cacao",
+          "Cream"
+      ]
+  },
+  {
+      "label": "Girl Scout Cookie Shot",
+      "ingredients": [
+          "Coffee liqueur",
+          "Irish cream",
+          "Peppermint schnapps"
+      ]
+  },
+  {
+      "label": "Fourth of July Shot",
+      "ingredients": [
+          "Vodka",
+          "Blue curaçao",
+          "Grenadine syrup"
+      ]
+  },
+  {
+      "label": "Blow Job Shot",
+      "ingredients": [
+          "Irish cream",
+          "Amaretto"
+      ]
+  },
+  {
+      "label": "Apocalypse Now Shot",
+      "ingredients": [
+          "Tequila",
+          "Irish cream",
+          "Dry Vermouth"
+      ]
+  },
+  {
+      "label": "Bazooka Joe Shot",
+      "ingredients": [
+          "Blue curaçao",
+          "Banana liqueur",
+          "Irish cream"
+      ]
+  },
+  {
+      "label": "Beam Me Up Scotty Shot",
+      "ingredients": [
+          "Banana liqueur",
+          "Irish cream",
+          "Coffee liqueur"
+      ]
+  },
+  {
+      "label": "Candy Corn Shot",
+      "ingredients": [
+          "Orange curaçao",
+          "Galliano",
+          "Cream"
+      ]
+  },
+  {
+      "label": "Flaming Dr. Pepper Shot",
+      "ingredients": [
+          "Beer",
+          "151-proof rum",
+          "Amaretto"
+      ]
+  },
+  {
+      "label": "Irish Flag Shot",
+      "ingredients": [
+          "Irish cream",
+          "Crème de menthe",
+          "Orange curaçao"
+      ]
+  },
+  {
+      "label": "Jäger Bomb",
+      "ingredients": [
+          "Jägermeister",
+          "Red Bull"
+      ]
+  },
+  {
+      "label": "Liquid Cocaine Shot",
+      "ingredients": [
+          "Jägermeister",
+          "Goldschläger",
+          "Peppermint schnapps"
+      ]
+  },
+  {
+      "label": "M&M Shot",
+      "ingredients": [
+          "Amaretto",
+          "Coffee liqueur"
+      ]
+  },
+  {
+      "label": "Melon Ball Shot",
+      "ingredients": [
+          "Vodka",
+          "Midori",
+          "Pineapple juice"
+      ]
+  },
+  {
+      "label": "Nutty Irishman Shot",
+      "ingredients": [
+          "Irish cream",
+          "Hazelnut liqueur"
+      ]
+  },
+  {
+      "label": "Oatmeal Cookie Shot",
+      "ingredients": [
+          "Butterscotch schnapps",
+          "Irish cream",
+          "Jägermeister",
+          "Cinnamon schnapps"
+      ]
+  },
+  {
+      "label": "Orgasm Shot",
+      "ingredients": [
+          "Irish cream",
+          "Amaretto",
+          "Coffee liqueur"
+      ]
+  },
+  {
+      "label": "Peanut Butter and Jelly Shot",
+      "ingredients": [
+          "Frangelico",
+          "Chambord",
+          "Raspberry liqueur",
+          "Hazelnut liqueur"
+      ]
+  },
+  {
+      "label": "Peppermint Patty Shot",
+      "ingredients": [
+          "Crème de cacao",
+          "Peppermint schnapps",
+          "Cream"
+      ]
+  },
+  {
+      "label": "Pirate's Treasure Shot",
+      "ingredients": [
+          "Spiced rum",
+          "Goldschläger"
+      ]
+  },
+  {
+      "label": "Polar Bear Shot",
+      "ingredients": [
+          "Crème de cacao",
+          "Peppermint schnapps"
+      ]
+  },
+  {
+      "label": "Purple Hooter Shot",
+      "ingredients": [
+          "Black raspberry liqueur",
+          "Vodka",
+          "Lime juice"
+      ]
+  },
+  {
+      "label": "Redheaded Slut Shot",
+      "ingredients": [
+          "Jägermeister",
+          "Peach schnapps",
+          "Cranberry juice"
+      ]
+  },
+  {
+      "label": "Red Snapper Shot",
+      "ingredients": [
+          "Whiskey",
+          "Amaretto",
+          "Cranberry juice"
+      ]
+  },
+  {
+      "label": "Red, White and Blue Shot",
+      "ingredients": [
+          "Peach schnapps",
+          "Blue curaçao",
+          "Grenadine syrup"
+      ]
+  },
+  {
+      "label": "Russian Qualude Shot",
+      "ingredients": [
+          "Vodka",
+          "Hazelnut liqueur",
+          "Irish cream"
+      ]
+  },
+  {
+      "label": "Santa Shot",
+      "ingredients": [
+          "Grenadine syrup",
+          "Crème de menthe",
+          "Peppermint schnapps"
+      ]
+  },
+  {
+      "label": "Shamrocked Shot",
+      "ingredients": [
+          "Irish whiskey",
+          "Midori",
+          "Irish cream"
+      ]
+  },
+  {
+      "label": "Slippery Nipple Shot",
+      "ingredients": [
+          "Sambuca",
+          "Irish cream"
+      ]
+  },
+  {
+      "label": "Snowball Shot",
+      "ingredients": [
+          "Brandy",
+          "Peppermint schnapps",
+          "Crème de cacao"
+      ]
+  },
+  {
+      "label": "Stoplight",
+      "ingredients": [
+          "Vodka",
+          "Orange juice",
+          "Midori",
+          "Cranberry juice"
+      ]
+  },
+  {
+      "label": "Tootsie Roll Shot",
+      "ingredients": [
+          "Vodka",
+          "Coffee liqueur",
+          "Orange juice"
+      ]
+  },
+  {
+      "label": "Woo Woo",
+      "ingredients": [
+          "Vodka",
+          "Peach schnapps",
+          "Cranberry juice"
+      ]
+  },
+  {
+      "label": "Tomahawk Shot",
+      "ingredients": [
+          "Amaretto",
+          "Cinnamon schnapps"
+      ]
+  },
+  {
+      "label": "Washington Apple Shot",
+      "ingredients": [
+          "Whiskey",
+          "Sour apple schnapps",
+          "Cranberry juice"
+      ]
+  },
+  {
+      "label": "Wake the Dead Shot",
+      "ingredients": [
+          "Tequila",
+          "Espresso",
+          "Coffee liqueur"
+      ]
+  },
+  {
+      "label": "Southern Joe",
+      "ingredients": [
+          "Jack Daniels whiskey",
+          "Southern Comfort"
+      ]
+  },
+  {
+      "label": "Berry Whipped Shot",
+      "ingredients": [
+          "Strawberry flavored vodka",
+          "Whipped flavored vodka",
+          "Grenadine syrup"
+      ]
+  },
+  {
+      "label": "Cool Colada Shot",
+      "ingredients": [
+          "Pineapple flavored vodka",
+          "Coconut flavored vodka",
+          "Pineapple juice"
+      ]
+  },
+  {
+      "label": "Boilermaker",
+      "ingredients": [
+          "Whiskey",
+          "Beer"
+      ]
+  },
+  {
+      "label": "White Russian",
+      "ingredients": [
+          "Vodka",
+          "Coffee liqueur",
+          "Cream"
+      ]
+  },
+  {
+      "label": "Dark 'n' Stormy",
+      "ingredients": [
+          "Ginger beer",
+          "Angostura bitters",
+          "Dark rum"
+      ]
+  },
+  {
+      "label": "Moscow Mule",
+      "ingredients": [
+          "Vodka",
+          "Ginger beer",
+          "Lime juice"
+      ]
+  },
+  {
+      "label": "French 75",
+      "ingredients": [
+          "Champagne",
+          "Lemon juice",
+          "Gin",
+          "Simple syrup"
+      ]
+  },
+  {
+      "label": "Blue Hawaiian",
+      "ingredients": [
+          "White rum",
+          "Blue curaçao",
+          "Pineapple juice",
+          "Coconut cream",
+          "Maraschino cherry"
+      ]
+  },
+  {
+      "label": "Hurricane",
+      "ingredients": [
+          "151-proof rum",
+          "White rum",
+          "Dark rum",
+          "Lemon juice",
+          "Orange juice",
+          "Simple syrup",
+          "Grenadine syrup",
+          "Passion fruit juice"
+      ]
+  },
+  {
+      "label": "Paloma",
+      "ingredients": [
+          "Tequila",
+          "Grapefruit soda"
+      ]
+  },
+  {
+      "label": "Mai Tai",
+      "ingredients": [
+          "White rum",
+          "Lime juice",
+          "Orange curaçao",
+          "Dark rum",
+          "Orgeat syrup"
+      ]
+  },
+  {
+      "label": "Appletini",
+      "ingredients": [
+          "Vodka",
+          "Apple schnapps",
+          "Triple sec"
+      ]
+  },
+  {
+      "label": "Boulevardier",
+      "ingredients": [
+          "Compari",
+          "Bourbon",
+          "Sweet vermouth"
+      ]
+  },
+  {
+      "label": "Americano",
+      "ingredients": [
+          "Soda water",
+          "Compari",
+          "Sweet vermouth"
+      ]
+  },
+  {
+      "label": "Trash Can",
+      "ingredients": [
+          "Red Bull",
+          "Gin",
+          "Vodka",
+          "White rum",
+          "Blue curaçao",
+          "Triple sec"
+      ]
+  },
+  {
+      "label": "Blue Lagoon",
+      "ingredients": [
+          "Vodka",
+          "Blue curaçao",
+          "Lemonaid"
+      ]
+  },
+  {
+      "label": "Tom Collins",
+      "ingredients": [
+          "Lemon juice",
+          "Simple syrup",
+          "Gin",
+          "Soda water"
+      ]
+  },
+  {
+      "label": "Cape Cod",
+      "ingredients": [
+          "Vodka",
+          "Cranberry juice"
+      ]
+  },
+  {
+      "label": "The Trashy Diplomat",
+      "ingredients": [
+          "Dry vermouth",
+          "Sweet vermouth",
+          "Grenadine syrup"
+      ]
+  },
+  {
+      "label": "Gold Rush",
+      "ingredients": [
+          "Bourbon",
+          "Lemon juice",
+          "Honey"
+      ]
+  },
+  {
+      "label": "Bee's Knees",
+      "ingredients": [
+          "Gin",
+          "Lemon juice",
+          "Honey"
+      ]
+  },
+  {
+      "label": "Blood and Sand",
+      "ingredients": [
+          "Orange juice",
+          "Sweet vermouth",
+          "Scotch",
+          "Cherry liqueur",
+          "Orange peel"
+      ]
   }
-
 ]
