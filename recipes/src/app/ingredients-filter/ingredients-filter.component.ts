@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { Ingredients } from '../shared/services/ingredients.service';
+import { Suggestions } from '../shared/services/suggestion.service';
 
 @Component({
   selector: 'app-ingredients-filter',
   templateUrl: './ingredients-filter.component.html'
 })
 export class IngredientsFilterComponent {
-  constructor(public ingredients: Ingredients) { }
+  constructor(public suggestions: Suggestions) { }
 }

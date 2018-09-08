@@ -1,6 +1,6 @@
 <h2>Recipes</h2>
 <ul>
-  <li *ngFor="let weight of suggestion.suggestedRecipes() | async">
-    <app-recipe-item [recipe]="weight.recipe"></app-recipe-item>
+  <li *ngFor="let suggestion of suggestions.suggestedRecipes() | async">
+    <app-recipe-item [recipe]="suggestion.recipe"></app-recipe-item>
   </li>
 </ul>

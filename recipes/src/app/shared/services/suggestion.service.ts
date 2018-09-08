@@ -5,10 +5,12 @@ import { Observable, fromEvent, of, concat } from 'rxjs';
 import { Recipe, RecipeWeight } from '../models/recipe.model';
 import { Ingredients } from './ingredients.service';
 import { Recipes } from './recipes.service';
+import { Ingredient, IngredientWeight } from '../models/ingredient.model';
 
 @Injectable()
-export class Suggestion {
+export class Suggestions {
   private _suggestedRecipes: Observable<RecipeWeight[]>;
+  private _suggestedIngredients: Observable<IngredientWeight[]>;
 
   constructor(protected ingredients: Ingredients,
               protected recipes: Recipes) {
@@ -30,9 +32,29 @@ export class Suggestion {
         );
       })
     );
+
+    this._suggestedIngredients = this.ingredients.list().pipe(
+        switchMap<Ingredient[], IngredientWeight[]>(ingredient_list => {
+          return this._suggestedRecipes.pipe(
+            map<RecipeWeight[], IngredientWeight[]>(recipe_list => {
+              return ingredient_list.map(ingredient => {
+                // Find all the RecipeWeight objects for recipes that include this ingredient
+                const ingredient_recipes = recipe_list.filter(recipe_weight => recipe_weight.recipe.ingredients.includes(ingredient));
+                // Sum their weight (Add one for this ingredient)
+                const weight = ingredient_recipes.reduce((sum, recipe) => sum + recipe.weight + 1, 0);
+                return new IngredientWeight(ingredient, weight);
+              }).sort((a, b) => b.weight - a.weight);
+              })
+          );
+        })
+      );
   }
 
   public suggestedRecipes(): Observable<RecipeWeight[]> {
     return this._suggestedRecipes;
+  }
+
+  public suggestedIngredients(): Observable<IngredientWeight[]> {
+    return this._suggestedIngredients;
   }
 }

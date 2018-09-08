@@ -1,6 +1,6 @@
 <h2>Ingredients</h2>
 <ul>
-  <li *ngFor="let ingredient of ingredients.list() | async">
-    <app-ingredient-item [ingredient]="ingredient"></app-ingredient-item>
+  <li *ngFor="let suggestion of suggestions.suggestedIngredients() | async">
+    <app-ingredient-item [ingredient]="suggestion.ingredient"></app-ingredient-item>
   </li>
 </ul>

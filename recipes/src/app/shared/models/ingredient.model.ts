@@ -1,5 +1,3 @@
-
-
 export class Ingredient {
   constructor(label: string) {
     this.label = label;
@@ -39,4 +37,14 @@ export class Ingredient {
     });
     document.dispatchEvent(event);
   }
+}
+
+export class IngredientWeight {
+  constructor(ingredient: Ingredient, weight: number) {
+    this.ingredient = ingredient;
+    this.weight = weight;
+  }
+
+  ingredient: Ingredient;
+  weight: number;
 }
