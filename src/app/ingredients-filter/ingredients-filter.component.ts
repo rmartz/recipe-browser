@@ -18,11 +18,15 @@ export class IngredientsFilterComponent {
   }
 
   public isCommon(suggestion: IngredientWeight) {
-    return !suggestion.ingredient.favorited && (suggestion.weight === 0) && (suggestion.occurrences > 0);
+    return (!suggestion.ingredient.favorited
+            && (suggestion.weight === 0)
+            && (suggestion.occurrences > 0));
   }
 
   public isSuggestion(suggestion: IngredientWeight) {
-    return !suggestion.ingredient.favorited && suggestion.weight > 0;
+    return (!suggestion.ingredient.favorited
+            && suggestion.weight > 0
+            && suggestion.additions > 0);
   }
 
 }

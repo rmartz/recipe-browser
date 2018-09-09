@@ -56,13 +56,15 @@ export class Ingredient {
 }
 
 export class IngredientWeight {
-  constructor(ingredient: Ingredient, weight: number, occurrences: number) {
+  constructor(ingredient: Ingredient, weight: number, occurrences: number, additions: number) {
     this.ingredient = ingredient;
     this.weight = weight;
     this.occurrences = occurrences;
+    this.additions = additions;
   }
 
   ingredient: Ingredient;
   weight: number;
   occurrences: number;
+  additions: number;
 }

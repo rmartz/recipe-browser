@@ -25,7 +25,7 @@ export class Suggestions {
         ).pipe(
           map<any, RecipeWeight[]>(() => {
             return list.map(recipe => {
-              const weight = recipe.ingredients.filter(ingredient => ingredient.favorited).length;
+              const weight = 1.0 * recipe.ingredients.filter(ingredient => ingredient.favorited).length / recipe.ingredients.length;
               return new RecipeWeight(recipe, weight);
             }).sort((a, b) => b.weight - a.weight);
           })
@@ -43,7 +43,8 @@ export class Suggestions {
                 // Sum their weight (Add one for this ingredient)
                 const weight = ingredient_recipes.reduce((sum, recipe) => sum + recipe.weight, 0);
                 const occurrences = ingredient_recipes.length;
-                return new IngredientWeight(ingredient, weight, occurrences);
+                const additions = ingredient_recipes.filter(recipe => recipe.weight === 0).length;
+                return new IngredientWeight(ingredient, weight, occurrences, additions);
               });
             })
           );
