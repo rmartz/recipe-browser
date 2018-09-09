@@ -1,6 +1,28 @@
 <h2>Ingredients</h2>
+<h3>Pinned</h3>
 <ul>
-  <li *ngFor="let suggestion of suggestions.suggestedIngredients() | async">
+  <li *ngFor="let suggestion of suggestions.suggestedIngredients() | async | callback: isFavorited | sortBy: 'weight'">
+    <app-ingredient-item [ingredient]="suggestion.ingredient"></app-ingredient-item>
+  </li>
+</ul>
+
+<h3>Suggestions</h3>
+<ul>
+  <li *ngFor="let suggestion of suggestions.suggestedIngredients() | async | callback: isSuggestion | sortBy: 'weight'">
+    <app-ingredient-item [ingredient]="suggestion.ingredient"></app-ingredient-item>
+  </li>
+</ul>
+
+<h3>Common</h3>
+<ul>
+    <li *ngFor="let suggestion of suggestions.suggestedIngredients() | async | callback: isCommon | sortBy: 'occurrences'">
+      <app-ingredient-item [ingredient]="suggestion.ingredient"></app-ingredient-item>
+    </li>
+  </ul>
+
+<h3>Blacklist</h3>
+<ul>
+  <li *ngFor="let suggestion of suggestions.suggestedIngredients() | async | callback: blacklisted">
     <app-ingredient-item [ingredient]="suggestion.ingredient"></app-ingredient-item>
   </li>
 </ul>

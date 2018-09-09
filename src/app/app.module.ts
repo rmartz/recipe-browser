@@ -10,10 +10,14 @@ import { RecipesDisplayComponent } from './recipes-display/recipes-display.compo
 import { IngredientItemComponent } from './ingredient-item/ingredient-item.component';
 import { RecipeItemComponent } from './recipe-item/recipe-item.component';
 import { Suggestions } from './shared/services/suggestion.service';
+import { CallbackPipe } from './shared/pipes/callback.pipe';
+import { SortByPipe } from './shared/pipes/sort-by.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
+    CallbackPipe,
+    SortByPipe,
     IngredientsFilterComponent,
     IngredientItemComponent,
     RecipesDisplayComponent,

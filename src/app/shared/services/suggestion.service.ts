@@ -41,10 +41,11 @@ export class Suggestions {
                 // Find all the RecipeWeight objects for recipes that include this ingredient
                 const ingredient_recipes = recipe_list.filter(recipe_weight => recipe_weight.recipe.ingredients.includes(ingredient));
                 // Sum their weight (Add one for this ingredient)
-                const weight = ingredient_recipes.reduce((sum, recipe) => sum + recipe.weight + 1, 0);
-                return new IngredientWeight(ingredient, weight);
-              }).sort((a, b) => b.weight - a.weight);
-              })
+                const weight = ingredient_recipes.reduce((sum, recipe) => sum + recipe.weight, 0);
+                const occurrences = ingredient_recipes.length;
+                return new IngredientWeight(ingredient, weight, occurrences);
+              });
+            })
           );
         })
       );
