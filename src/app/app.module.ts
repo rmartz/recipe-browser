@@ -12,6 +12,7 @@ import { RecipeItemComponent } from './recipe-item/recipe-item.component';
 import { Suggestions } from './shared/services/suggestion.service';
 import { CallbackPipe } from './shared/pipes/callback.pipe';
 import { SortByPipe } from './shared/pipes/sort-by.pipe';
+import { IngredientsFilterSectionComponent } from './ingredients-filter/ingredients-filter-section/ingredients-filter-section.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { SortByPipe } from './shared/pipes/sort-by.pipe';
     CallbackPipe,
     SortByPipe,
     IngredientsFilterComponent,
+    IngredientsFilterSectionComponent,
     IngredientItemComponent,
     RecipesDisplayComponent,
     RecipeItemComponent

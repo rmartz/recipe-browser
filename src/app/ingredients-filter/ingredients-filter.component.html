@@ -1,45 +1,24 @@
 <h2>Ingredients</h2>
-<div *ngIf="suggestions.suggestedIngredients() | async | callback: isFavorited as pinned">
-  <div *ngIf="pinned.length > 0">
-    <h3>Favorited</h3>
-    <ul>
-      <li *ngFor="let suggestion of pinned | sortBy: 'weight'">
-        <app-ingredient-item [ingredient]="suggestion.ingredient"></app-ingredient-item>
-      </li>
-    </ul>
-  </div>
-</div>
+<app-ingredients-filter-section
+  [suggestions]="suggestions.suggestedIngredients() | async | callback: isFavorited"
+  [sortKey]="'weight'"
+  [heading]="'Favorited'">
+</app-ingredients-filter-section>
 
-<div *ngIf="suggestions.suggestedIngredients() | async | callback: isSuggestion as suggested">
-  <div *ngIf="suggested.length > 0">
-    <h3>Suggestions</h3>
-    <ul>
-      <li *ngFor="let suggestion of suggested | sortBy: 'weight'">
-        <app-ingredient-item [ingredient]="suggestion.ingredient"></app-ingredient-item>
-      </li>
-    </ul>
-  </div>
-</div>
+<app-ingredients-filter-section
+  [suggestions]="suggestions.suggestedIngredients() | async | callback: isSuggestion"
+  [sortKey]="'weight'"
+  [heading]="'Suggestions'">
+</app-ingredients-filter-section>
 
-<div *ngIf="suggestions.suggestedIngredients() | async | callback: isCommon as common">
-  <div *ngIf="common.length > 0">
-    <h3>Common</h3>
-    <ul>
-      <li *ngFor="let suggestion of common | sortBy: 'occurrences' | slice:0:10">
-        <app-ingredient-item [ingredient]="suggestion.ingredient"></app-ingredient-item>
-      </li>
-    </ul>
-  </div>
-</div>
+<app-ingredients-filter-section
+  [suggestions]="suggestions.suggestedIngredients() | async | callback: isCommon"
+  [sortKey]="'occurrences'"
+  [heading]="'Common'">
+</app-ingredients-filter-section>
 
-<div *ngIf="suggestions.suggestedIngredients() | async | callback: isBlacklisted as blacklist">
-  <div *ngIf="blacklist.length > 0">
-    <h3>Blacklist</h3>
-    <ul>
-      <li *ngFor="let suggestion of blacklist | sortBy: 'occurrences'">
-        <app-ingredient-item [ingredient]="suggestion.ingredient"></app-ingredient-item>
-      </li>
-    </ul>
-  </div>
-</div>
-
+<app-ingredients-filter-section
+  [suggestions]="suggestions.suggestedIngredients() | async | callback: isBlacklisted"
+  [sortKey]="'occurrences'"
+  [heading]="'Blacklist'">
+</app-ingredients-filter-section>

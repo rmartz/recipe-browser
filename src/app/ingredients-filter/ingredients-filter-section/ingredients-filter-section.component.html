@@ -1,0 +1,8 @@
+<div *ngIf="suggestions.length > 0">
+  <h3>{{heading}}</h3>
+  <ul>
+    <li *ngFor="let suggestion of suggestions | sortBy: sortKey | slice:0:10">
+      <app-ingredient-item [ingredient]="suggestion.ingredient"></app-ingredient-item>
+    </li>
+  </ul>
+</div>
