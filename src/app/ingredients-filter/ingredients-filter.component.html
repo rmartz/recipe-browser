@@ -25,7 +25,7 @@
   <div *ngIf="common.length > 0">
     <h3>Common</h3>
     <ul>
-      <li *ngFor="let suggestion of common | sortBy: 'occurrences'">
+      <li *ngFor="let suggestion of common | sortBy: 'occurrences' | slice:0:10">
         <app-ingredient-item [ingredient]="suggestion.ingredient"></app-ingredient-item>
       </li>
     </ul>
