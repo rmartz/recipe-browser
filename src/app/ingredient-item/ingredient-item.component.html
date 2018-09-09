@@ -1,7 +1,15 @@
-{{ingredient.label}}
+<div [ngClass]="{'ingredient-favorited': ingredient.favorited, 'ingredient-blocked': ingredient.blocked}">
+  <span class="ingredient-label">
+    {{ingredient.label}}
+  </span>
 
-<button *ngIf="!ingredient.favorited" (click)="ingredient.favorited = true">✓</button>
-<button *ngIf="ingredient.favorited" (click)="ingredient.favorited = false" style="background: #4A4">✓</button>
+  <button *ngIf="!ingredient.favorited" (click)="ingredient.favorited = true"
+    class="button-neutral">✓</button>
+  <button *ngIf="ingredient.favorited" (click)="ingredient.favorited = false"
+    class="button-positive">✓</button>
 
-<button *ngIf="!ingredient.blacklisted" (click)="ingredient.blacklisted = true">x</button>
-<button *ngIf="ingredient.blacklisted" (click)="ingredient.blacklisted = false" style="background: #F00">x</button>
+  <button *ngIf="!ingredient.blacklisted" (click)="ingredient.blacklisted = true"
+    class="button-neutral">x</button>
+  <button *ngIf="ingredient.blacklisted" (click)="ingredient.blacklisted = false"
+    class="button-negative">x</button>
+</div>

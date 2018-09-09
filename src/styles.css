@@ -1,1 +1,17 @@
 /* You can add global styles to this file, and also import other style files */
+.button-positive {
+  background: #4A4;
+}
+
+.button-negative {
+  background: #F00;
+}
+
+.button-neutral {
+  background: #EEE;
+}
+
+
+.main-columns {
+  display: flex;
+}
