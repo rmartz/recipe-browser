@@ -1,7 +1,7 @@
 <h2>Ingredients</h2>
 <div *ngIf="suggestions.suggestedIngredients() | async | callback: isFavorited as pinned">
   <div *ngIf="pinned.length > 0">
-    <h3>Pinned</h3>
+    <h3>Favorited</h3>
     <ul>
       <li *ngFor="let suggestion of pinned | sortBy: 'weight'">
         <app-ingredient-item [ingredient]="suggestion.ingredient"></app-ingredient-item>
