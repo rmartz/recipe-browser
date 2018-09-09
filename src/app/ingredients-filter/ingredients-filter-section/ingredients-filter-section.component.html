@@ -1,8 +1,16 @@
 <div *ngIf="suggestions.length > 0">
   <h3>{{heading}}</h3>
   <ul>
-    <li *ngFor="let suggestion of suggestions | sortBy: sortKey | slice:0:10">
+    <li *ngFor="let suggestion of suggestions | sortBy: sortKey | slice: 0:viewport">
       <app-ingredient-item [ingredient]="suggestion.ingredient"></app-ingredient-item>
     </li>
   </ul>
+
+  <a class="link" *ngIf="viewport !== undefined && suggestions.length > viewport" (click)="expand()">
+    More
+  </a>
+
+  <a class="link" *ngIf="viewport === undefined" (click)="shrink()">
+    Fewer
+  </a>
 </div>

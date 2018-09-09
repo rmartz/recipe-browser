@@ -15,3 +15,8 @@
 .main-columns {
   display: flex;
 }
+
+a.link {
+  cursor: pointer;
+  color: #44A;
+}

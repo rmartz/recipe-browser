@@ -10,5 +10,15 @@ export class IngredientsFilterSectionComponent {
   @Input() sortKey: String;
   @Input() heading: String;
 
+  public viewport = 10;
+
   constructor() { }
+
+  public expand() {
+    this.viewport = undefined;
+  }
+
+  public shrink() {
+    this.viewport = 10;
+  }
 }
