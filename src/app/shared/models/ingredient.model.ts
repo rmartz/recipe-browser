@@ -13,6 +13,10 @@ export class Ingredient {
   }
 
   set blacklisted(blacklisted: boolean) {
+    if (blacklisted === this._blacklisted) {
+      // No action needed
+      return;
+    }
     this._blacklisted = blacklisted;
 
     const event = new CustomEvent('blacklistChange', {
@@ -21,6 +25,10 @@ export class Ingredient {
       }
     });
     document.dispatchEvent(event);
+
+    if (blacklisted) {
+      this.favorited = false;
+    }
   }
 
   get favorited(): boolean {
@@ -28,6 +36,10 @@ export class Ingredient {
   }
 
   set favorited(favorited: boolean) {
+    if (favorited === this._favorited) {
+      // No action needed
+      return;
+    }
     this._favorited = favorited;
 
     const event = new CustomEvent('favoriteChange', {
@@ -36,6 +48,10 @@ export class Ingredient {
       }
     });
     document.dispatchEvent(event);
+
+    if (favorited) {
+      this.blacklisted = false;
+    }
   }
 }
 
