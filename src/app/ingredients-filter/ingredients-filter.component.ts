@@ -9,7 +9,7 @@ import { IngredientWeight } from '../shared/models/ingredient.model';
 export class IngredientsFilterComponent {
   constructor(public suggestions: Suggestions) { }
 
-  public blacklisted(suggestion: IngredientWeight) {
+  public isBlacklisted(suggestion: IngredientWeight) {
     return suggestion.ingredient.blacklisted;
   }
 
