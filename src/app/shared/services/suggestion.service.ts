@@ -25,7 +25,8 @@ export class Suggestions {
         ).pipe(
           map<any, RecipeWeight[]>(() => {
             return list.map(recipe => {
-              const weight = 1.0 * recipe.ingredients.filter(ingredient => ingredient.favorited).length / recipe.ingredients.length;
+              const weight = (1.0 * recipe.ingredients.filter(ingredient => ingredient.favorited).length
+                              / Math.sqrt(recipe.ingredients.length));
               return new RecipeWeight(recipe, weight);
             }).sort((a, b) => b.weight - a.weight);
           })
