@@ -13,12 +13,14 @@ import { Suggestions } from './shared/services/suggestion.service';
 import { CallbackPipe } from './shared/pipes/callback.pipe';
 import { SortByPipe } from './shared/pipes/sort-by.pipe';
 import { IngredientsFilterSectionComponent } from './ingredients-filter/ingredients-filter-section/ingredients-filter-section.component';
+import { ShufflePipe } from './shared/pipes/shuffle.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     CallbackPipe,
     SortByPipe,
+    ShufflePipe,
     IngredientsFilterComponent,
     IngredientsFilterSectionComponent,
     IngredientItemComponent,

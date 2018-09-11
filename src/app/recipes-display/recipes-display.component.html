@@ -5,7 +5,7 @@
   </li>
 </ul>
 <ul *ngIf="!(ingredients.hasFavorited() | async)">
-  <li *ngFor="let recipe of recipes.filtered() | async | slice: 0:5">
+  <li *ngFor="let recipe of recipes.filtered() | async | shuffle | slice: 0:5">
     <app-recipe-item [recipe]="recipe"></app-recipe-item>
   </li>
 </ul>
