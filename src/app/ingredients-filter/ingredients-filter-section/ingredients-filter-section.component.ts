@@ -7,7 +7,6 @@ import { IngredientWeight } from '../../shared/models/ingredient.model';
 })
 export class IngredientsFilterSectionComponent {
   @Input() suggestions: IngredientWeight[];
-  @Input() sortKey: String;
   @Input() heading: String;
 
   public viewport = 10;
