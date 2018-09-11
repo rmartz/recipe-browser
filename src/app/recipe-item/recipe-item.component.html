@@ -1,7 +1,9 @@
-{{recipe.label}}
+<div class="recipe-item">
+  <em>{{recipe.label}}</em>
 
-<ul>
-  <li *ngFor="let ingredient of recipe.ingredients">
-      <app-ingredient-item [ingredient]="ingredient"></app-ingredient-item>
-  </li>
-</ul>
+  <ul class="ingredient-list">
+    <li *ngFor="let ingredient of recipe.ingredients">
+        <app-ingredient-item [ingredient]="ingredient"></app-ingredient-item>
+    </li>
+  </ul>
+</div>

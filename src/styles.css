@@ -20,3 +20,24 @@ a.link {
   cursor: pointer;
   color: #44A;
 }
+
+ul.recipe-list {
+  list-style: none;
+}
+
+ul.recipe-list>li {
+  border: 1px solid #aaa;
+  background-color: #f7f7f7;
+  border-radius: 1rem;
+  padding: 0.7rem 0.4rem 0.4rem 0.7rem;
+  margin-bottom: 2rem;
+}
+
+ul.ingredient-list>li {
+  margin: 0.3rem 0 0.3rem 0;
+}
+
+.recipe-item em {
+  font-weight: 600;
+  font-style: normal;
+}
