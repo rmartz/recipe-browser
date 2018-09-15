@@ -53,7 +53,7 @@
       ]
   },
   {
-      "label": "Mimmosa",
+      "label": "Mimosa",
       "ingredients": [
           "Champagne",
           "Orange juice"
@@ -279,7 +279,6 @@
       "ingredients": [
           "Bourbon",
           "Powdered sugar",
-          "Water",
           "Mint"
       ]
   },
@@ -288,8 +287,7 @@
       "ingredients": [
           "Pineapple juice",
           "White rum",
-          "Coconut cream",
-          "Ice"
+          "Coconut cream"
       ]
   },
   {
@@ -402,7 +400,7 @@
       ]
   },
   {
-      "label": "Jäger Bomb",
+      "label": "Jägerbomb",
       "ingredients": [
           "Jägermeister",
           "Red Bull"
@@ -808,5 +806,71 @@
         "Fernet Branca",
         "Simple syrup"
       ]
+  },
+  {
+    "label": "Cinnamon Toast Crunch shot",
+    "ingredients": [
+        "Fireball whiskey",
+        "Rumchata liqueur"
+    ]
+  },
+  {
+    "label": "Hot Toddy",
+    "ingredients": [
+        "Bourbon",
+        "Lemon juice",
+        "Honey"
+    ]
+  },
+  {
+    "label": "Aperol Spritz",
+    "ingredients": [
+      "Prosecco",
+      "Aperol",
+      "Soda water"
+    ]
+  },
+  {
+    "label": "Elderflower Mimosa",
+    "ingredients": [
+      "Elderflower liqueur",
+      "Orange juice",
+      "Prosecco"
+    ]
+  },
+  {
+    "label": "Elderflower Sparkler",
+    "ingredients": [
+      "Elderflower liqueur",
+      "Lime juice",
+      "Prosecco"
+    ]
+  },
+  {
+    "label": "Elderflower Aperol Spritz",
+    "ingredients": [
+      "Elderflower liqueur",
+      "Prosecco",
+      "Aperol",
+      "Soda water"
+    ]
+  },
+  {
+    "label": "Parisian Daiquiri",
+    "ingredients": [
+      "Elderflower liqueur",
+      "White rum",
+      "Lime juice",
+      "Sugar"
+    ]
+  },
+  {
+    "label": "Bourbon Smash",
+    "ingredients": [
+      "Simple syrup",
+      "Bourbon",
+      "Mint",
+      "Lemon"
+    ]
   }
 ]
