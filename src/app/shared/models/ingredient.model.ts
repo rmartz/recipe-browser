@@ -1,23 +1,53 @@
+export enum Rating {
+  Unrated = 0,
+  Liked = 1,
+  Disliked = 2,
+  Neutral = 3
+}
+
 export class Ingredient {
   constructor(label: string) {
     this.label = label;
-    this._blacklisted = false;
+    this._rating = Rating.Unrated;
   }
 
   label: string;
-  _blacklisted: boolean;
-  _favorited: boolean;
+  _rating: Rating;
+
+  get rating(): Rating {
+    return this._rating;
+  }
+
+  set rating(rating: Rating) {
+    if (rating === Rating.Liked) {
+      this.favorited = true;
+    } else if (rating === Rating.Disliked) {
+      this.blacklisted = true;
+    } else {
+      if (this.blacklisted) {
+        this.blacklisted = false;
+      }
+      if (this.favorited) {
+        this.favorited = false;
+      }
+      this._rating = rating;
+    }
+  }
 
   get blacklisted(): boolean {
-    return this._blacklisted;
+    return this._rating === Rating.Disliked;
   }
 
   set blacklisted(blacklisted: boolean) {
-    if (blacklisted === this._blacklisted) {
+    if (blacklisted === this.blacklisted) {
       // No action needed
       return;
     }
-    this._blacklisted = blacklisted;
+    if (blacklisted) {
+      this._rating = Rating.Disliked;
+    } else {
+      this._rating = Rating.Unrated;
+    }
 
     const event = new CustomEvent('blacklistChange', {
       detail: {
@@ -32,15 +62,19 @@ export class Ingredient {
   }
 
   get favorited(): boolean {
-    return this._favorited;
+    return this._rating === Rating.Liked;
   }
 
   set favorited(favorited: boolean) {
-    if (favorited === this._favorited) {
+    if (favorited === this.favorited) {
       // No action needed
       return;
     }
-    this._favorited = favorited;
+    if (favorited) {
+      this._rating = Rating.Liked;
+    } else {
+      this._rating = Rating.Unrated;
+    }
 
     const event = new CustomEvent('favoriteChange', {
       detail: {

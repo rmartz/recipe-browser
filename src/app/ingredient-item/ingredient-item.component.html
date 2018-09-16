@@ -2,14 +2,19 @@
   <span class="ingredient-label">
     {{ingredient.label}}
   </span>
-
-  <button *ngIf="!ingredient.favorited" (click)="ingredient.favorited = true"
-    class="button-neutral">✓</button>
+  <br>
+    <button *ngIf="!ingredient.favorited" (click)="ingredient.favorited = true"
+    class="button-neutral">Like</button>
   <button *ngIf="ingredient.favorited" (click)="ingredient.favorited = false"
-    class="button-positive">✓</button>
+    class="button-positive-active">Like</button>
+
+  <button *ngIf="!(ingredient.rating === ratings.Neutral)" (click)="ingredient.rating = ratings.Neutral"
+    class="button-neutral">Meh</button>
+  <button *ngIf="ingredient.rating === ratings.Neutral" (click)="ingredient.rating = ratings.Unrated"
+    class="button-neutral-active">Meh</button>
 
   <button *ngIf="!ingredient.blacklisted" (click)="ingredient.blacklisted = true"
-    class="button-neutral">x</button>
+    class="button-neutral">Nope</button>
   <button *ngIf="ingredient.blacklisted" (click)="ingredient.blacklisted = false"
-    class="button-negative">x</button>
+    class="button-negative-active">Nope</button>
 </div>

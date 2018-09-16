@@ -9,7 +9,7 @@ export class IngredientsFilterSectionComponent {
   @Input() suggestions: IngredientWeight[];
   @Input() heading: String;
 
-  public viewport = 10;
+  public viewport = 5;
 
   constructor() { }
 
@@ -18,6 +18,6 @@ export class IngredientsFilterSectionComponent {
   }
 
   public shrink() {
-    this.viewport = 10;
+    this.viewport = 5;
   }
 }
