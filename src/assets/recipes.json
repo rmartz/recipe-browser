@@ -40,7 +40,6 @@
       "label": "Gin Gimlet",
       "ingredients": [
           "Lime juice",
-          "Rasberries",
           "Gin",
           "Simple syrup"
       ]
@@ -173,7 +172,7 @@
       ]
   },
   {
-      "label": "Kamikaze Shot",
+      "label": "Kamikaze",
       "ingredients": [
           "Triple sec",
           "Vodka",
@@ -257,7 +256,7 @@
       ]
   },
   {
-      "label": "Fizz",
+      "label": "Gin Fizz",
       "ingredients": [
           "Gin",
           "Lemon juice",
@@ -306,7 +305,7 @@
       ]
   },
   {
-      "label": "Irish Frog Shot",
+      "label": "Irish Frog",
       "ingredients": [
           "Midori",
           "Irish cream"
@@ -337,7 +336,7 @@
       ]
   },
   {
-      "label": "Fourth of July Shot",
+      "label": "Fourth of July",
       "ingredients": [
           "Vodka",
           "Blue curaçao",
@@ -345,14 +344,14 @@
       ]
   },
   {
-      "label": "Blow Job Shot",
+      "label": "Blow Job",
       "ingredients": [
           "Irish cream",
           "Amaretto"
       ]
   },
   {
-      "label": "Apocalypse Now Shot",
+      "label": "Apocalypse Now",
       "ingredients": [
           "Tequila",
           "Irish cream",
@@ -360,7 +359,7 @@
       ]
   },
   {
-      "label": "Bazooka Joe Shot",
+      "label": "Bazooka Joe",
       "ingredients": [
           "Blue curaçao",
           "Banana liqueur",
@@ -368,7 +367,7 @@
       ]
   },
   {
-      "label": "Beam Me Up Scotty Shot",
+      "label": "Beam Me Up Scotty",
       "ingredients": [
           "Banana liqueur",
           "Irish cream",
@@ -384,7 +383,7 @@
       ]
   },
   {
-      "label": "Flaming Dr. Pepper Shot",
+      "label": "Flaming Dr. Pepper",
       "ingredients": [
           "Beer",
           "151-proof rum",
@@ -456,8 +455,6 @@
   {
       "label": "Peanut Butter and Jelly Shot",
       "ingredients": [
-          "Frangelico",
-          "Chambord",
           "Raspberry liqueur",
           "Hazelnut liqueur"
       ]
@@ -478,7 +475,7 @@
       ]
   },
   {
-      "label": "Polar Bear Shot",
+      "label": "Polar Bear",
       "ingredients": [
           "Crème de cacao",
           "Peppermint schnapps"
@@ -493,7 +490,7 @@
       ]
   },
   {
-      "label": "Redheaded Slut Shot",
+      "label": "Redheaded Slut",
       "ingredients": [
           "Jägermeister",
           "Peach schnapps",
@@ -501,7 +498,7 @@
       ]
   },
   {
-      "label": "Red Snapper Shot",
+      "label": "Red Snapper",
       "ingredients": [
           "Whiskey",
           "Amaretto",
@@ -517,7 +514,7 @@
       ]
   },
   {
-      "label": "Russian Qualude Shot",
+      "label": "Russian Quaalude",
       "ingredients": [
           "Vodka",
           "Hazelnut liqueur",
