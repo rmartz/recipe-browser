@@ -1,20 +1,10 @@
 <h2>Ingredients</h2>
 <app-ingredients-filter-section
-  [suggestions]="suggestions.suggestedIngredients() | async | callback: isFavorited | sortBy: 'weight'"
-  [heading]="'Favorited'">
-</app-ingredients-filter-section>
-
-<app-ingredients-filter-section
-  [suggestions]="suggestions.suggestedIngredients() | async | callback: isSuggestion | sortBy: 'weight'"
+  [suggestions]="suggestions.suggestedIngredients() | async | callback: isSuggestion | sortBy: ['-weight', '-occurrences']"
   [heading]="'Suggestions'">
 </app-ingredients-filter-section>
 
 <app-ingredients-filter-section
-  [suggestions]="suggestions.suggestedIngredients() | async | callback: isCommon | sortBy: 'occurrences'"
-  [heading]="'Common'">
-</app-ingredients-filter-section>
-
-<app-ingredients-filter-section
-  [suggestions]="suggestions.suggestedIngredients() | async | callback: isBlacklisted | sortBy: 'occurrences'"
-  [heading]="'Blacklist'">
+  [suggestions]="suggestions.suggestedIngredients() | async | callback: isRated | sortBy: ['-occurrences']"
+  [heading]="'Rated'">
 </app-ingredients-filter-section>
