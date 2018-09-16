@@ -1,6 +1,6 @@
 <h2>Recipes</h2>
 <ul class="recipe-list" *ngIf="hasSuggestions() | async">
-  <li *ngFor="let suggestion of suggestions.suggestedRecipes() | async | callback: isSuggested | sortBy: 'weight'">
+  <li *ngFor="let suggestion of suggestions.suggestedRecipes() | async | callback: isSuggested | sortBy: ['-weight']">
     <app-recipe-item [recipe]="suggestion.recipe"></app-recipe-item>
   </li>
 </ul>
