@@ -26,4 +26,9 @@ export class RecipesDisplayComponent {
       })
     );
   }
+
+  public shuffle() {
+    const event = new CustomEvent('shuffleRecipes');
+    document.dispatchEvent(event);
+  }
 }

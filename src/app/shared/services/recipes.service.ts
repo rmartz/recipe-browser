@@ -5,12 +5,14 @@ import { Observable, BehaviorSubject, fromEvent, of, concat } from 'rxjs';
 
 import { Recipe, RecipeJson } from '../models/recipe.model';
 import { Ingredients } from './ingredients.service';
+import { shuffle } from '../utils/shuffle';
 
 @Injectable()
 export class Recipes {
 
   private _recipes = new BehaviorSubject<Recipe[]>([]);
   private _filtered: Observable<Recipe[]>;
+  private _random: Observable<Recipe[]>;
 
   constructor(protected http: HttpClient,
               protected ingredients: Ingredients) {
@@ -42,6 +44,19 @@ export class Recipes {
           );
         })
       );
+
+      this._random = this.filtered().pipe(
+        switchMap<Recipe[], Recipe[]>(list => {
+          return concat(
+            of(this),
+            fromEvent(document, 'shuffleRecipes')
+          ).pipe(
+            map<any, Recipe[]>(() => {
+              return shuffle(list);
+            })
+          );
+        })
+      );
     }
 
   public all(): Observable<Recipe[]> {
@@ -50,5 +65,9 @@ export class Recipes {
 
   public filtered(): Observable<Recipe[]> {
     return this._filtered;
+  }
+
+  public random(): Observable<Recipe[]> {
+    return this._random;
   }
 }

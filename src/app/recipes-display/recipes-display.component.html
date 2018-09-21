@@ -4,8 +4,13 @@
     <app-recipe-item [recipe]="suggestion.recipe"></app-recipe-item>
   </li>
 </ul>
-<ul class="recipe-list" *ngIf="!(hasSuggestions() | async)">
-  <li *ngFor="let recipe of recipes.filtered() | async | shuffle | slice: 0:5">
-    <app-recipe-item [recipe]="recipe"></app-recipe-item>
-  </li>
-</ul>
+<div *ngIf="!(hasSuggestions() | async)">
+  <p>
+    <a class="link" (click)="shuffle()">Shuffle ⟳</a>
+  </p>
+  <ul class="recipe-list">
+    <li *ngFor="let recipe of recipes.random() | async | slice: 0:5">
+      <app-recipe-item [recipe]="recipe"></app-recipe-item>
+    </li>
+  </ul>
+</div>

@@ -14,7 +14,6 @@ import { Suggestions } from './shared/services/suggestion.service';
 import { CallbackPipe } from './shared/pipes/callback.pipe';
 import { SortByPipe } from './shared/pipes/sort-by.pipe';
 import { IngredientsFilterSectionComponent } from './ingredients-filter/ingredients-filter-section/ingredients-filter-section.component';
-import { ShufflePipe } from './shared/pipes/shuffle.pipe';
 import { IngredientsSearchComponent } from './ingredients-filter/ingredients-search/ingredients-search.component';
 import { ToIngredientPipe } from './shared/pipes/toingredient.pipe';
 import { AlphabetizePipe } from './shared/pipes/alphabetize.pipe';
@@ -25,7 +24,6 @@ import { AlphabetizePipe } from './shared/pipes/alphabetize.pipe';
     CallbackPipe,
     AlphabetizePipe,
     SortByPipe,
-    ShufflePipe,
     ToIngredientPipe,
     IngredientsFilterComponent,
     IngredientsFilterSectionComponent,
