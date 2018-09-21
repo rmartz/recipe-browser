@@ -1,12 +1,11 @@
-<div *ngIf="suggestions.length > 0">
-  <h3>{{heading}}</h3>
+<div *ngIf="ingredients.length > 0; else nocontent">
   <ul class="ingredient-list">
-    <li *ngFor="let suggestion of suggestions | slice: 0:viewport">
-      <app-ingredient-item [ingredient]="suggestion.ingredient"></app-ingredient-item>
+    <li *ngFor="let ingredient of ingredients | slice: 0:viewport">
+      <app-ingredient-item [ingredient]="ingredient"></app-ingredient-item>
     </li>
   </ul>
 
-  <a class="link" *ngIf="viewport !== undefined && suggestions.length > viewport" (click)="expand()">
+  <a class="link" *ngIf="viewport !== undefined && ingredients.length > viewport" (click)="expand()">
     More
   </a>
 
@@ -14,3 +13,8 @@
     Fewer
   </a>
 </div>
+<ng-template #nocontent>
+  <p>
+    <ng-content></ng-content>
+  </p>
+</ng-template>

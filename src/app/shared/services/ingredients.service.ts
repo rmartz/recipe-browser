@@ -34,6 +34,15 @@ export class Ingredients {
     return this._list[name];
   }
 
+  public search(name: string): Observable<Ingredient[]> {
+    name = name.toLocaleLowerCase();
+    return this.list().pipe(
+      map(ingredients => {
+        return ingredients.filter(ingredient => ingredient.label.toLocaleLowerCase().includes(name));
+      })
+    );
+  }
+
   public hasFavorited(): Observable<boolean> {
     return this._has_favorited;
   }

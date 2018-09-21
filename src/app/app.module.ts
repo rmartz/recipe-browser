@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import { IngredientsFilterComponent } from './ingredients-filter/ingredients-filter.component';
@@ -14,6 +15,8 @@ import { CallbackPipe } from './shared/pipes/callback.pipe';
 import { SortByPipe } from './shared/pipes/sort-by.pipe';
 import { IngredientsFilterSectionComponent } from './ingredients-filter/ingredients-filter-section/ingredients-filter-section.component';
 import { ShufflePipe } from './shared/pipes/shuffle.pipe';
+import { IngredientsSearchComponent } from './ingredients-filter/ingredients-search/ingredients-search.component';
+import { ToIngredientPipe } from './shared/pipes/toingredient.pipe';
 
 @NgModule({
   declarations: [
@@ -21,15 +24,18 @@ import { ShufflePipe } from './shared/pipes/shuffle.pipe';
     CallbackPipe,
     SortByPipe,
     ShufflePipe,
+    ToIngredientPipe,
     IngredientsFilterComponent,
     IngredientsFilterSectionComponent,
+    IngredientsSearchComponent,
     IngredientItemComponent,
     RecipesDisplayComponent,
     RecipeItemComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
     Ingredients,

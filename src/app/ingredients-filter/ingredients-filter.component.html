@@ -1,10 +1,14 @@
 <h2>Ingredients</h2>
+<app-ingredients-search></app-ingredients-search>
+
+<h3>Suggestions</h3>
 <app-ingredients-filter-section
-  [suggestions]="suggestions.suggestedIngredients() | async | callback: isSuggestion | sortBy: ['-weight', '-occurrences']"
-  [heading]="'Suggestions'">
+  [ingredients]="suggestions.suggestedIngredients() | async | callback: isSuggestion | sortBy: ['-weight', '-occurrences'] | toIngredient">
+  Nothing left to suggest!
 </app-ingredients-filter-section>
 
+<h3>Rated</h3>
 <app-ingredients-filter-section
-  [suggestions]="suggestions.suggestedIngredients() | async | callback: isRated | sortBy: ['-occurrences']"
-  [heading]="'Rated'">
+  [ingredients]="suggestions.suggestedIngredients() | async | callback: isRated | sortBy: ['-occurrences'] | toIngredient">
+  No ingredients rated yet
 </app-ingredients-filter-section>

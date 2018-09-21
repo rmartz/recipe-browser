@@ -1,0 +1,7 @@
+<input type="text" [(ngModel)]="search_string" placeholder="Search...">
+
+<app-ingredients-filter-section
+  *ngIf="search_string !== ''"
+  [ingredients]="ingredients.search(search_string) | async">
+  No results found
+  </app-ingredients-filter-section>
