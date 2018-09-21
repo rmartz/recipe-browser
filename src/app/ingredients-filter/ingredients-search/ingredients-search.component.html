@@ -2,6 +2,6 @@
 
 <app-ingredients-filter-section
   *ngIf="search_string !== ''"
-  [ingredients]="ingredients.search(search_string) | async">
+  [ingredients]="ingredients.search(search_string) | async | alphabetize: 'label'">
   No results found
-  </app-ingredients-filter-section>
+</app-ingredients-filter-section>

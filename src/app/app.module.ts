@@ -17,11 +17,13 @@ import { IngredientsFilterSectionComponent } from './ingredients-filter/ingredie
 import { ShufflePipe } from './shared/pipes/shuffle.pipe';
 import { IngredientsSearchComponent } from './ingredients-filter/ingredients-search/ingredients-search.component';
 import { ToIngredientPipe } from './shared/pipes/toingredient.pipe';
+import { AlphabetizePipe } from './shared/pipes/alphabetize.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     CallbackPipe,
+    AlphabetizePipe,
     SortByPipe,
     ShufflePipe,
     ToIngredientPipe,
