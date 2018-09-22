@@ -6,10 +6,16 @@
 </ul>
 <div *ngIf="!(hasSuggestions() | async)">
   <p>
-    <a class="link" (click)="shuffle()">Shuffle ⟳</a>
+    You haven't Like'd any ingredients yet...
+  </p>
+  <p>
+    Here is a random suggestion to get you started:
+  </p>
+  <p>
+    <a class="link" (click)="shuffle()">Show another ⟳</a>
   </p>
   <ul class="recipe-list">
-    <li *ngFor="let recipe of recipes.random() | async | slice: 0:5">
+    <li *ngFor="let recipe of recipes.random() | async | slice: 0:1">
       <app-recipe-item [recipe]="recipe"></app-recipe-item>
     </li>
   </ul>

@@ -15,6 +15,10 @@
   background: #EEE;
 }
 
+p {
+  padding-left: 2em;
+}
+
 .main-columns {
   display: flex;
 }
