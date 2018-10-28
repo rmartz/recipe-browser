@@ -1,4 +1,0 @@
-# Ignore python generated files
-*.py[cod]
-
-db.sqlite3
