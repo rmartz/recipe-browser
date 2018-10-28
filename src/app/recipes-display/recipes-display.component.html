@@ -1,22 +1,24 @@
-<h2>Recipes</h2>
-<ul class="recipe-list" *ngIf="hasSuggestions() | async">
-  <li *ngFor="let suggestion of suggestions.suggestedRecipes() | async | callback: isSuggested | sortBy: ['-weight']">
-    <app-recipe-item [recipe]="suggestion.recipe"></app-recipe-item>
-  </li>
-</ul>
-<div *ngIf="!(hasSuggestions() | async)">
-  <p>
-    You haven't Like'd any ingredients yet...
-  </p>
-  <p>
-    Here is a random suggestion to get you started:
-  </p>
-  <p>
-    <a class="link" (click)="shuffle()">Show another ⟳</a>
-  </p>
-  <ul class="recipe-list">
-    <li *ngFor="let recipe of recipes.random() | async | slice: 0:1">
-      <app-recipe-item [recipe]="recipe"></app-recipe-item>
+<div class="recipes-display">
+  <h2>Recipes</h2>
+  <ul class="recipe-list" *ngIf="hasSuggestions() | async">
+    <li *ngFor="let suggestion of suggestions.suggestedRecipes() | async | callback: isSuggested | sortBy: ['-weight']">
+      <app-recipe-item [recipe]="suggestion.recipe"></app-recipe-item>
     </li>
   </ul>
+  <div *ngIf="!(hasSuggestions() | async)">
+    <p>
+      Use the "Like" button next to any ingredients you want to see suggestions of recipes that use them and you might enjoy. Similarly, use the "Nope" button on an ingredient to avoid being suggested any recipes that include it. Recipes that match more "Like"-d ingredients will be shown higher.
+    </p>
+    <p>
+      To help get you started, here is a random recipe suggestion:
+    </p>
+    <p>
+      <a class="link" (click)="shuffle()">Show another ⟳</a>
+    </p>
+    <ul class="recipe-list">
+      <li *ngFor="let recipe of recipes.random() | async | slice: 0:1">
+        <app-recipe-item [recipe]="recipe"></app-recipe-item>
+      </li>
+    </ul>
+  </div>
 </div>

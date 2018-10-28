@@ -28,6 +28,10 @@ a.link {
   color: #44A;
 }
 
+.recipes-display {
+  width: 35rem;
+}
+
 ul.recipe-list {
   list-style: none;
 }
