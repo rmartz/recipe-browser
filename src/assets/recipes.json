@@ -355,7 +355,7 @@
       "ingredients": [
           "Tequila",
           "Irish cream",
-          "Dry Vermouth"
+          "Dry vermouth"
       ]
   },
   {
@@ -868,6 +868,93 @@
       "Bourbon",
       "Mint",
       "Lemon"
+    ]
+  },
+  {
+    "label": "Jack Rose",
+    "ingredients": [
+      "Applejack",
+      "Grenadine syrup",
+      "Lime juice"
+    ]
+  },
+  {
+    "label": "Sazerac",
+    "ingredients": [
+      "Peychaud's bitters",
+      "Sugar",
+      "Rye whiskey",
+      "Absinthe",
+      "Lemon"
+    ]
+  },
+  {
+    "label": "Martinez",
+    "ingredients": [
+      "Gin",
+      "Sweet vermouth",
+      "Maraschino liqueur",
+      "Orange bitters"
+    ]
+  },
+  {
+    "label": "Brooklyn",
+    "ingredients": [
+      "Rye whiskey",
+      "Dry vermouth",
+      "Maraschino liqueur",
+      "Angostura bitters"
+    ]
+  },
+  {
+    "label": "Vieux Carré",
+    "ingredients": [
+      "Benedictine",
+      "Peychaud's bitters",
+      "Angostura bitters",
+      "Rye whiskey",
+      "Cognac",
+      "Sweet vermouth"
+    ]
+  },
+  {
+    "label": "Ramos Gin Fizz",
+    "ingredients": [
+      "Gin",
+      "Egg whites",
+      "Cream",
+      "Lemon juice",
+      "Lime juice",
+      "Sugar",
+      "Orange flower water"
+    ]
+  },
+  {
+    "label": "Planter's Punch",
+    "ingredients": [
+      "Dark rum",
+      "Simple syrup",
+      "Lime juice",
+      "Angostura bitters"
+    ]
+  },
+  {
+    "label": "Pisco Sour",
+    "ingredients": [
+      "Pisco",
+      "Lime juice",
+      "Simple syrup",
+      "Egg whites",
+      "Angostura bitters"
+    ]
+  },
+  {
+    "label": "The Last Word",
+    "ingredients": [
+      "Gin",
+      "Lime juice",
+      "Maraschino liqueur",
+      "Green Chartreuse"
     ]
   }
 ]
