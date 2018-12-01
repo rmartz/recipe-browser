@@ -1,4 +1,4 @@
-![Travis CI status](https://travis-ci.org/rmartz/recipe-browser.svg?branch=develop)
+[![Travis CI status](https://travis-ci.org/rmartz/recipe-browser.svg?branch=develop)](https://travis-ci.org/rmartz/recipe-browser)
 
 # Recipe Browser
 Aims to help people find recipes that they may be interested in, by using "Like" to prioritize recipes that include a given recipe and "Nope" to exclude any recipes that do. Recipes that include a higher proportion of "Like"-d ingredients are prioritized more, with a slight focus on recipes that match numerically more matching ingredients (So a recipe that includes 2 selected ingredient out of 4 would rank above a recipe that includes 1 selected ingredient out of 2).
